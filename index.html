@@ -2751,6 +2751,309 @@
     })();
     </script>
 
+    <section data-tela="painel-da-equipe" class="hidden">
+    <div class="px-4 pt-3 pb-24 space-y-4">
+        <div class="flex items-start justify-between">
+            <div>
+                <h2 class="font-display text-xl font-bold text-gray-900">Painel da Equipe</h2>
+                <p class="text-sm text-gray-500 mt-0.5">Bem-vindo, Carlos — 12º Polinscrito</p>
+            </div>
+            <button onclick="painel_da_equipe_toggleSidebar()" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center active:scale-95 transition-all hover:bg-gray-200">
+                <svg class="w-5 h-5 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+
+        <div class="relative">
+            <svg class="w-5 h-5 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input id="painel-search" type="text" placeholder="Buscar pedidos, clientes..." oninput="painel_da_equipe_search(this.value)" class="w-full pl-10 pr-4 py-2.5 bg-white border border-gray-200 rounded-xl text-sm font-body focus:outline-none focus:ring-2 focus:ring-marca-500/30 focus:border-marca-500 transition-all">
+        </div>
+
+        <div id="painel-kpis" class="grid grid-cols-2 gap-3">
+            <div class="card p-3.5" onclick="mostrarTela('meus-pedidos')">
+                <div class="flex items-center justify-between mb-2"><span class="text-xs text-gray-500 font-medium">Pedidos do Mês</span><div class="w-8 h-8 rounded-lg bg-marca-50 flex items-center justify-center"><svg class="w-4 h-4 text-marca-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg></div></div>
+                <p class="font-display text-2xl font-bold text-gray-900">48</p>
+                <span class="text-xs text-green-600 font-medium flex items-center gap-0.5"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg> +12%</span>
+            </div>
+            <div class="card p-3.5" onclick="mostrarTela('painel-administrativo')">
+                <div class="flex items-center justify-between mb-2"><span class="text-xs text-gray-500 font-medium">Receita Total</span><div class="w-8 h-8 rounded-lg bg-green-50 flex items-center justify-center"><svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div></div>
+                <p class="font-display text-2xl font-bold text-gray-900">R$ 28,4k</p>
+                <span class="text-xs text-green-600 font-medium flex items-center gap-0.5"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"/></svg> +23%</span>
+            </div>
+            <div class="card p-3.5" onclick="mostrarTela('chat-e-suporte')">
+                <div class="flex items-center justify-between mb-2"><span class="text-xs text-gray-500 font-medium">Avaliação Média</span><div class="w-8 h-8 rounded-lg bg-amber-50 flex items-center justify-center"><svg class="w-4 h-4 text-amber-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></div></div>
+                <p class="font-display text-2xl font-bold text-gray-900">4,8 <span class="text-sm font-normal text-gray-400">/ 5</span></p>
+                <div class="flex gap-0.5 mt-1">★★★★★</div>
+            </div>
+            <div class="card p-3.5" onclick="mostrarTela('chat-e-suporte')">
+                <div class="flex items-center justify-between mb-2"><span class="text-xs text-gray-500 font-medium">Taxa de Resposta</span><div class="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center"><svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg></div></div>
+                <p class="font-display text-2xl font-bold text-gray-900">94%</p>
+                <span class="text-xs text-green-600 font-medium">+3% este mês</span>
+            </div>
+        </div>
+
+        <div class="card p-4">
+            <div class="flex items-center justify-between mb-3"><h3 class="font-display text-sm font-bold text-gray-900">Receita — Últimos 7 Dias</h3><span class="badge badge-success">+18%</span></div>
+            <svg viewBox="0 0 340 100" class="w-full h-24">
+                <defs><linearGradient id="lineGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#059669" stop-opacity="0.2"/><stop offset="100%" stop-color="#059669" stop-opacity="0"/></linearGradient></defs>
+                <polyline fill="url(#lineGrad)" points="0,85 48,72 97,58 145,65 193,40 242,30 290,22 340,18 340,100 0,100"/>
+                <polyline fill="none" stroke="#059669" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" points="0,85 48,72 97,58 145,65 193,40 242,30 290,22 340,18"/>
+                <circle cx="48" cy="72" r="3.5" fill="white" stroke="#059669" stroke-width="2"/><circle cx="97" cy="58" r="3.5" fill="white" stroke="#059669" stroke-width="2"/><circle cx="145" cy="65" r="3.5" fill="white" stroke="#059669" stroke-width="2"/><circle cx="193" cy="40" r="3.5" fill="white" stroke="#059669" stroke-width="2"/><circle cx="242" cy="30" r="3.5" fill="white" stroke="#059669" stroke-width="2"/><circle cx="290" cy="22" r="3.5" fill="white" stroke="#059669" stroke-width="2"/><circle cx="340" cy="18" r="4.5" fill="#059669" stroke="white" stroke-width="2"/>
+                <text x="0" y="98" font-size="8" fill="#9CA3AF" font-family="system-ui">Seg</text><text x="48" y="98" font-size="8" fill="#9CA3AF" font-family="system-ui">Ter</text><text x="97" y="98" font-size="8" fill="#9CA3AF" font-family="system-ui">Qua</text><text x="145" y="98" font-size="8" fill="#9CA3AF" font-family="system-ui">Qui</text><text x="193" y="98" font-size="8" fill="#9CA3AF" font-family="system-ui">Sex</text><text x="242" y="98" font-size="8" fill="#9CA3AF" font-family="system-ui">Sáb</text><text x="290" y="98" font-size="8" fill="#9CA3AF" font-family="system-ui">Dom</text>
+                <text x="340" y="22" font-size="9" fill="#059669" font-weight="bold" font-family="system-ui" text-anchor="end">R$ 820</text>
+            </svg>
+            <div class="flex justify-between mt-1 text-xs text-gray-400"><span>Média diária: R$ 405</span><span>Meta: R$ 500/dia</span></div>
+        </div>
+
+        <div class="card p-4">
+            <h3 class="font-display text-sm font-bold text-gray-900 mb-3">Pedidos por Categoria</h3>
+            <div class="flex items-end gap-2 h-28 mb-2">
+                <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full rounded-t-lg bg-marca-600 transition-all hover:bg-marca-700" style="height:70%"></div><span class="text-[10px] text-gray-400">Cult.</span></div>
+                <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full rounded-t-lg bg-marca-500 transition-all hover:bg-marca-600" style="height:55%"></div><span class="text-[10px] text-gray-400">Cien.</span></div>
+                <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full rounded-t-lg bg-marca-400 transition-all hover:bg-marca-500" style="height:40%"></div><span class="text-[10px] text-gray-400">Tec.</span></div>
+                <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full rounded-t-lg bg-amber-400 transition-all hover:bg-amber-500" style="height:85%"></div><span class="text-[10px] text-gray-400">Ofic.</span></div>
+                <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full rounded-t-lg bg-green-400 transition-all hover:bg-green-500" style="height:60%"></div><span class="text-[10px] text-gray-400">Event.</span></div>
+                <div class="flex-1 flex flex-col items-center gap-1"><div class="w-full rounded-t-lg bg-blue-400 transition-all hover:bg-blue-500" style="height:30%"></div><span class="text-[10px] text-gray-400">Outr.</span></div>
+            </div>
+            <div class="flex items-center justify-between text-xs text-gray-400 border-t border-gray-100 pt-2"><span>Total: 48 pedidos</span><button onclick="mostrarTela('painel-administrativo')" class="text-marca-600 font-medium hover:text-marca-700 transition-colors">Ver relatório →</button></div>
+        </div>
+
+        <div>
+            <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-2">
+                    <h3 class="font-display text-base font-bold text-gray-900">Solicitações Pendentes</h3>
+                    <span id="painel-badge-pendentes" class="badge badge-warning">5</span>
+                </div>
+                <div class="flex gap-1.5">
+                    <button onclick="painel_da_equipe_filtrar('todos')" class="painel-filter-btn active px-3 py-1 rounded-lg text-xs font-medium transition-all" data-filter="todos">Todos</button>
+                    <button onclick="painel_da_equipe_filtrar('pendente')" class="painel-filter-btn px-3 py-1 rounded-lg text-xs font-medium transition-all" data-filter="pendente">Pendentes</button>
+                    <button onclick="painel_da_equipe_filtrar('negociando')" class="painel-filter-btn px-3 py-1 rounded-lg text-xs font-medium transition-all" data-filter="negociando">Negociando</button>
+                </div>
+            </div>
+            <div id="painel-lista-solicitacoes" class="space-y-3">
+            </div>
+            <div id="painel-empty-solicitacoes" class="hidden card p-8 text-center">
+                <div class="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center mx-auto mb-3"><svg class="w-7 h-7 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+                <p class="text-sm text-gray-500 font-medium">Nenhuma solicitação encontrada</p>
+                <p class="text-xs text-gray-400 mt-1">Tente outro filtro ou aguarde novas solicitações</p>
+            </div>
+        </div>
+
+        <div class="card p-4">
+            <div class="flex items-center justify-between mb-3">
+                <h3 class="font-display text-sm font-bold text-gray-900">Agenda do Dia</h3>
+                <span class="text-xs text-gray-400">Hoje, 24 Jan</span>
+            </div>
+            <div class="relative pl-8 space-y-4">
+                <div class="absolute left-[11px] top-1.5 bottom-1.5 w-0.5 bg-gray-200"></div>
+                <div onclick="painel_da_equipe_verAgenda('09:00','Mariana Costa')" class="relative cursor-pointer group">
+                    <div class="absolute -left-8 top-0.5 w-[18px] h-[18px] rounded-full bg-marca-600 border-[3px] border-white shadow-sm group-active:scale-90 transition-transform"></div>
+                    <div class="bg-marca-50 rounded-xl p-3 border border-marca-100 hover:border-marca-200 transition-all">
+                        <div class="flex items-center justify-between"><span class="text-sm font-bold text-marca-800">09:00</span><span class="badge badge-success text-[10px]">Confirmado</span></div>
+                        <p class="text-sm font-medium text-gray-900 mt-0.5">Mariana Costa</p>
+                        <p class="text-xs text-gray-500">Oficina de Robótica Kids</p>
+                        <p class="text-xs text-gray-400 mt-0.5 flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Duração: 2h</p>
+                    </div>
+                </div>
+                <div onclick="painel_da_equipe_verAgenda('11:30','João Pedro')" class="relative cursor-pointer group">
+                    <div class="absolute -left-8 top-0.5 w-[18px] h-[18px] rounded-full bg-marca-600 border-[3px] border-white shadow-sm group-active:scale-90 transition-transform"></div>
+                    <div class="bg-marca-50 rounded-xl p-3 border border-marca-100 hover:border-marca-200 transition-all">
+                        <div class="flex items-center justify-between"><span class="text-sm font-bold text-marca-800">11:30</span><span class="badge badge-warning text-[10px]">Aguardando</span></div>
+                        <p class="text-sm font-medium text-gray-900 mt-0.5">João Pedro Almeida</p>
+                        <p class="text-xs text-gray-500">Consultoria Científica</p>
+                        <p class="text-xs text-gray-400 mt-0.5 flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Duração: 1h</p>
+                    </div>
+                </div>
+                <div onclick="painel_da_equipe_verAgenda('14:00','Equipe Cultural')" class="relative cursor-pointer group">
+                    <div class="absolute -left-8 top-0.5 w-[18px] h-[18px] rounded-full bg-amber-400 border-[3px] border-white shadow-sm group-active:scale-90 transition-transform"></div>
+                    <div class="bg-amber-50 rounded-xl p-3 border border-amber-100 hover:border-amber-200 transition-all">
+                        <div class="flex items-center justify-between"><span class="text-sm font-bold text-amber-800">14:00</span><span class="badge badge-warning text-[10px]">Aguardando</span></div>
+                        <p class="text-sm font-medium text-gray-900 mt-0.5">Equipe Cultural</p>
+                        <p class="text-xs text-gray-500">Evento de Divulgação Científica</p>
+                        <p class="text-xs text-gray-400 mt-0.5 flex items-center gap-1"><svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Duração: 3h</p>
+                    </div>
+                </div>
+                <div onclick="painel_da_equipe_verAgenda('17:00','Ana Beatriz')" class="relative cursor-pointer group">
+                    <div class="absolute -left-8 top-0.5 w-[18px] h-[18px] rounded-full bg-gray-300 border-[3px] border-white shadow-sm group-active:scale-90 transition-transform"></div>
+                    <div class="bg-gray-50 rounded-xl p-3 border border-gray-100 opacity-70">
+                        <div class="flex items-center justify-between"><span class="text-sm font-bold text-gray-500">17:00</span><span class="badge badge-neutral text-[10px]">Livre</span></div>
+                        <p class="text-sm font-medium text-gray-400 mt-0.5">Horário disponível</p>
+                        <p class="text-xs text-gray-400 mt-0.5">Pode ser agendado</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button onclick="painel_da_equipe_simularNotificacao()" class="w-full py-3 rounded-xl bg-gradient-to-r from-marca-600 to-marca-700 text-white font-display font-bold text-sm active:scale-[0.98] transition-all shadow-lg shadow-marca-600/20 hover:shadow-xl hover:shadow-marca-600/30 flex items-center justify-center gap-2">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+            Simular Nova Notificação
+        </button>
+    </div>
+
+    <div id="painel-sidebar-overlay" onclick="painel_da_equipe_toggleSidebar()" class="fixed inset-0 bg-black/40 z-40 hidden opacity-0 transition-opacity duration-300"></div>
+    <aside id="painel-sidebar" class="fixed top-0 left-0 h-full w-72 bg-white z-50 shadow-2xl transform -translate-x-full transition-transform duration-300 ease-out flex flex-col">
+        <div class="p-5 bg-gradient-to-br from-marca-700 to-marca-900 text-white">
+            <div class="flex items-center gap-3">
+                <div class="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center text-lg font-bold">CE</div>
+                <div><p class="font-display font-bold">Carlos Eduardo</p><p class="text-xs text-white/70">Polinscrito #12</p><span class="badge badge-success mt-1">Equipe Ativa</span></div>
+            </div>
+        </div>
+        <nav class="flex-1 p-3 space-y-1 overflow-y-auto">
+            <button onclick="mostrarTela('vitrine-do-marketplace');painel_da_equipe_toggleSidebar()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-marca-50 hover:text-marca-700 transition-all active:scale-95"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m7-7l7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg> Vitrine</button>
+            <button onclick="mostrarTela('agenda-de-agendamentos');painel_da_equipe_toggleSidebar()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-marca-50 hover:text-marca-700 transition-all active:scale-95"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg> Agenda</button>
+            <button onclick="mostrarTela('meus-pedidos');painel_da_equipe_toggleSidebar()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-marca-700 bg-marca-50"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg> Pedidos</button>
+            <button onclick="mostrarTela('chat-e-suporte');painel_da_equipe_toggleSidebar()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-marca-50 hover:text-marca-700 transition-all active:scale-95 relative"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg> Chat<span class="absolute right-3 w-2.5 h-2.5 bg-red-500 rounded-full animate-pulse"></span></button>
+            <button onclick="mostrarTela('painel-administrativo');painel_da_equipe_toggleSidebar()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-marca-50 hover:text-marca-700 transition-all active:scale-95"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg> Relatórios</button>
+            <button onclick="mostrarTela('perfil-e-documentos');painel_da_equipe_toggleSidebar()" class="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-gray-700 hover:bg-marca-50 hover:text-marca-700 transition-all active:scale-95"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg> Configurações</button>
+        </nav>
+        <div class="p-4 border-t border-gray-100"><button onclick="mostrarTela('vitrine-do-marketplace');painel_da_equipe_toggleSidebar()" class="w-full py-2.5 rounded-xl border border-gray-200 text-sm font-medium text-gray-600 hover:bg-gray-50 transition-all active:scale-95 flex items-center justify-center gap-2"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg> Sair da Conta</button></div>
+    </aside>
+
+    <script>
+        const painel_solicitacoes_data = [
+            {id:1,nome:"Fernanda Lima",servico:"Oficina de Robótica",valor:320,status:"pendente",data:"24/01",horario:"10:00",avatar:"FL",cor:"bg-marca-600"},
+            {id:2,nome:"Roberto Dias",servico:"Consultoria Tecnológica",valor:500,status:"pendente",data:"24/01",horario:"14:00",avatar:"RD",cor:"bg-amber-500"},
+            {id:3,nome:"Patrícia Souza",servico:"Evento Cultural",valor:1500,status:"negociando",data:"25/01",horario:"09:00",avatar:"PS",cor:"bg-purple-500"},
+            {id:4,nome:"Lucas Mendes",servico:"Aula de Programação",valor:200,status:"pendente",data:"25/01",horario:"16:00",avatar:"LM",cor:"bg-green-500"},
+            {id:5,nome:"Isabela Ferreira",servico:"Oficina de Arte Digital",valor:280,status:"pendente",data:"26/01",horario:"11:00",avatar:"IF",cor:"bg-pink-500"},
+            {id:6,nome:"Thiago Nascimento",servico:"Consultoria Científica",valor:750,status:"negociando",data:"26/01",horario:"15:00",avatar:"TN",cor:"bg-blue-500"}
+        ];
+
+        let painel_filtro_atual = 'todos';
+
+        function painel_da_equipe_renderLista(filtro) {
+            const container = document.getElementById('painel-lista-solicitacoes');
+            const empty = document.getElementById('painel-empty-solicitacoes');
+            let items = painel_solicitacoes_data;
+            if (filtro === 'pendente') items = items.filter(s => s.status === 'pendente');
+            if (filtro === 'negociando') items = items.filter(s => s.status === 'negociando');
+            container.innerHTML = '';
+            if (items.length === 0) { container.classList.add('hidden'); empty.classList.remove('hidden'); return; }
+            container.classList.remove('hidden'); empty.classList.add('hidden');
+            items.forEach(s => {
+                const valor = s.valor.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+                const badgeCls = s.status==='pendente'?'badge-warning':'badge-info';
+                const badgeTxt = s.status==='pendente'?'Pendente':'Negociando';
+                const div = document.createElement('div');
+                div.className = 'card p-3.5 hover:shadow-md transition-all cursor-pointer';
+                div.onclick = (e) => { if(!e.target.closest('button')) painel_da_equipe_abrirDetalhe(s); };
+                div.innerHTML = `
+                    <div class="flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-full ${s.cor} text-white flex items-center justify-center text-sm font-bold flex-shrink-0">${s.avatar}</div>
+                        <div class="flex-1 min-w-0">
+                            <div class="flex items-center justify-between gap-2">
+                                <p class="text-sm font-bold text-gray-900 truncate">${s.nome}</p>
+                                <span class="badge ${badgeCls} flex-shrink-0">${badgeTxt}</span>
+                            </div>
+                            <p class="text-xs text-gray-500 mt-0.5">${s.servico}</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-sm font-bold text-marca-700">${valor}</span>
+                                <span class="text-[11px] text-gray-400">${s.data} às ${s.horario}</span>
+                            </div>
+                            <div class="flex gap-2 mt-2.5">
+                                ${s.status==='pendente'?`
+                                <button onclick="event.stopPropagation();painel_da_equipe_aceitar(${s.id})" class="flex-1 py-1.5 rounded-lg bg-green-600 text-white text-xs font-bold active:scale-95 transition-all hover:bg-green-700">Aceitar</button>
+                                <button onclick="event.stopPropagation();painel_da_equipe_recusar(${s.id})" class="flex-1 py-1.5 rounded-lg bg-red-600 text-white text-xs font-bold active:scale-95 transition-all hover:bg-red-700">Recusar</button>
+                                <button onclick="event.stopPropagation();painel_da_equipe_negociar(${s.id})" class="flex-1 py-1.5 rounded-lg bg-amber-500 text-white text-xs font-bold active:scale-95 transition-all hover:bg-amber-600">Negociar</button>
+                                `:`<button onclick="event.stopPropagation();painel_da_equipe_negociar(${s.id})" class="flex-1 py-1.5 rounded-lg bg-amber-500 text-white text-xs font-bold active:scale-95 transition-all hover:bg-amber-600">Negociar Valor</button>`}
+                            </div>
+                        </div>
+                    </div>`;
+                container.appendChild(div);
+            });
+            document.getElementById('painel-badge-pendentes').textContent = painel_solicitacoes_data.filter(s => s.status==='pendente').length;
+        }
+
+        function painel_da_equipe_aceitar(id) {
+            const s = painel_solicitacoes_data.find(x => x.id === id);
+            if (!s) return;
+            s.status = 'aceito';
+            toast(`Pedido de ${s.nome} aceito com sucesso!`, 'ok');
+            painel_da_equipe_renderLista(painel_filtro_atual);
+        }
+
+        function painel_da_equipe_recusar(id) {
+            const s = painel_solicitacoes_data.find(x => x.id === id);
+            if (!s) return;
+            abrirModal(`<p class="text-sm text-gray-600">Tem certeza que deseja recusar o pedido de <strong>${s.nome}</strong> para <strong>${s.servico}</strong>?</p><p class="text-xs text-gray-400 mt-2">O cliente será notificado da recusa.</p>`, 'Confirmar Recusa').then(() => {
+                painel_solicitacoes_data.splice(painel_solicitacoes_data.indexOf(s), 1);
+                toast(`Pedido de ${s.nome} recusado.`, 'info');
+                painel_da_equipe_renderLista(painel_filtro_atual);
+            }).catch(() => {});
+        }
+
+        function painel_da_equipe_negociar(id) {
+            const s = painel_solicitacoes_data.find(x => x.id === id);
+            if (!s) return;
+            s.status = 'negociando';
+            toast(`Negociação iniciada com ${s.nome}. Valor atual: ${s.valor.toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}`, 'info');
+            painel_da_equipe_renderLista(painel_filtro_atual);
+        }
+
+        function painel_da_equipe_abrirDetalhe(s) {
+            const valor = s.valor.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+            abrirModal(`
+                <div class="text-center mb-4"><div class="w-16 h-16 rounded-full ${s.cor} text-white flex items-center justify-center text-xl font-bold mx-auto">${s.avatar}</div><p class="font-display font-bold text-lg mt-2">${s.nome}</p><p class="text-sm text-gray-500">${s.servico}</p><span class="badge ${s.status==='pendente'?'badge-warning':'badge-info'} mt-2">${s.status==='pendente'?'Pendente':'Negociando'}</span></div>
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">Valor do Serviço</span><span class="font-bold text-marca-700">${valor}</span></div>
+                    <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">Data</span><span class="font-medium">${s.data}</span></div>
+                    <div class="flex justify-between py-2 border-b border-gray-100"><span class="text-gray-500">Horário</span><span class="font-medium">${s.horario}</span></div>
+                    <div class="flex justify-between py-2"><span class="text-gray-500">ID do Pedido</span><span class="font-medium text-gray-400">#PED-${String(s.id).padStart(4,'0')}</span></div>
+                </div>
+                <div class="flex gap-2 mt-4">
+                    <button onclick="fecharModal();painel_da_equipe_aceitar(${s.id})" class="flex-1 py-2.5 rounded-xl bg-green-600 text-white text-sm font-bold active:scale-95 transition-all">Aceitar</button>
+                    <button onclick="fecharModal();painel_da_equipe_negociar(${s.id})" class="flex-1 py-2.5 rounded-xl bg-amber-500 text-white text-sm font-bold active:scale-95 transition-all">Negociar</button>
+                    <button onclick="fecharModal();painel_da_equipe_recusar(${s.id})" class="flex-1 py-2.5 rounded-xl bg-red-600 text-white text-sm font-bold active:scale-95 transition-all">Recusar</button>
+                </div>
+            `, 'Detalhes do Pedido');
+        }
+
+        function painel_da_equipe_filtrar(f) {
+            painel_filtro_atual = f;
+            document.querySelectorAll('.painel-filter-btn').forEach(b => {
+                b.classList.toggle('bg-marca-600', b.dataset.filter === f);
+                b.classList.toggle('text-white', b.dataset.filter === f);
+                b.classList.toggle('text-gray-500', b.dataset.filter !== f);
+                b.classList.toggle('bg-gray-100', b.dataset.filter !== f);
+                b.classList.toggle('hover:bg-gray-200', b.dataset.filter !== f);
+            });
+            painel_da_equipe_renderLista(f);
+        }
+
+        function painel_da_equipe_search(term) {
+            const t = term.toLowerCase();
+            document.querySelectorAll('#painel-lista-solicitacoes > div').forEach(el => {
+                const txt = el.textContent.toLowerCase();
+                el.style.display = txt.includes(t) ? '' : 'none';
+            });
+        }
+
+        function painel_da_equipe_toggleSidebar() {
+            const sidebar = document.getElementById('painel-sidebar');
+            const overlay = document.getElementById('painel-sidebar-overlay');
+            const isOpen = !sidebar.classList.contains('-translate-x-full');
+            if (isOpen) {
+                sidebar.classList.add('-translate-x-full'); overlay.classList.add('hidden'); overlay.classList.remove('opacity-100');
+            } else {
+                sidebar.classList.remove('-translate-x-full'); overlay.classList.remove('hidden'); requestAnimationFrame(() => overlay.classList.add('opacity-100'));
+            }
+        }
+
+        function painel_da_equipe_verAgenda(hora, nome) {
+            toast(`Agendamento com ${nome} às ${hora} — clique para detalhes`, 'info');
+        }
+
+        function painel_da_equipe_simularNotificacao() {
+            const sons = [440, 523, 659];
+            const ctx = new (window.AudioContext || window.webkitAudioContext)();
+            sons.forEach((f, i) => { const o = ctx.createOscillator(); const g = ctx.createGain(); o.connect(g); g.connect(ctx.destination); o.frequency.value = f; o.type = 'sine'; g.gain.setValueAtTime(0.08, ctx.currentTime + i * 0.12); g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + i * 0.12 + 0.15); o.start(ctx.currentTime + i * 0.12); o.stop(ctx.currentTime + i * 0.12 + 0.15); });
+            toast('🔔 Nova solicitação: Rafael Oliveira quer "Curso de Astronomia" — R$ 450,00', 'info');
+        }
+
+        painel_da_equipe_renderLista('todos');
+        document.querySelectorAll('.painel-filter-btn[data-filter="todos"]').forEach(b => { b.classList.add('bg-marca-600','text-white'); b.classList.remove('text-gray-500','bg-gray-100'); });
+    </script>
+</section>
+
     <!-- TELAS -->
         </div>
 
