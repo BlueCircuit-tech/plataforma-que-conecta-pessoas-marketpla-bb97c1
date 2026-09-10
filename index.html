@@ -2453,6 +2453,304 @@
   </script>
 </section>
 
+    <section data-tela="chat-e-suporte" class="hidden">
+      <div id="cs-view-list">
+        <div class="px-4 pt-4 pb-2">
+          <div class="flex items-center justify-between mb-1">
+            <div>
+              <h2 class="font-display text-xl font-bold text-cinza-900">Chat</h2>
+              <p class="text-sm text-cinza-500">Suas conversas e suporte</p>
+            </div>
+            <div class="w-9 h-9 rounded-full bg-marca-100 flex items-center justify-center cursor-pointer hover:bg-marca-200 transition-colors active:scale-95" onclick="chat_e_suporte_abrirSuporte()" title="Novo chat de suporte">
+              <svg class="w-5 h-5 text-marca-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-3.037 8.43-7.253 9.75.227.724.42 1.475.574 2.247h.762c4.556 0 8.43-3.037 9.75-7.253M21 12c0-4.556-3.037-8.43-7.253-9.75.227-.724.42-1.475.574-2.247h.762c4.556 0 8.43 3.037 9.75 7.253M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+          </div>
+          <div class="mt-3 relative">
+            <svg class="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cinza-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+            <input id="cs-search" type="text" placeholder="Buscar conversa..." class="w-full pl-9 pr-4 py-2.5 bg-cinza-100 border border-cinza-200 rounded-xl text-sm font-body text-cinza-900 placeholder:text-cinza-400 focus:outline-none focus:ring-2 focus:ring-marca-500 focus:border-transparent transition-all" oninput="chat_e_suporte_buscar(this.value)">
+          </div>
+          <div class="flex gap-2 mt-3 overflow-x-auto pb-1 no-scrollbar">
+            <button id="cs-filter-all" class="cs-filter-btn flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium bg-marca-600 text-white transition-all" onclick="chat_e_suporte_filtrar('todas')">Todas</button>
+            <button id="cs-filter-unread" class="cs-filter-btn flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium bg-cinza-100 text-cinza-600 hover:bg-cinza-200 transition-all" onclick="chat_e_suporte_filtrar('nao-lidas')">Não lidas</button>
+            <button id="cs-filter-active" class="cs-filter-btn flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium bg-cinza-100 text-cinza-600 hover:bg-cinza-200 transition-all" onclick="chat_e_suporte_filtrar('ativas')">Ativas</button>
+          </div>
+        </div>
+        <div id="cs-conversa-empty" class="hidden px-4 py-12 text-center">
+          <div class="w-16 h-16 mx-auto mb-3 rounded-full bg-cinza-100 flex items-center justify-center">
+            <svg class="w-8 h-8 text-cinza-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-3.037 8.43-7.253 9.75.227.724.42 1.475.574 2.247h.762c4.556 0 8.43-3.037 9.75-7.253M21 12c0-4.556-3.037-8.43-7.253-9.75.227-.724.42-1.475.574-2.247h.762c4.556 0 8.43 3.037 9.75 7.253M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <p class="text-sm text-cinza-500 font-medium">Nenhuma conversa encontrada</p>
+          <p class="text-xs text-cinza-400 mt-1">Tente buscar com outro termo</p>
+        </div>
+        <div id="cs-list" class="px-4 pb-4 space-y-1.5"></div>
+      </div>
+      <div id="cs-view-chat" class="hidden flex flex-col h-full">
+        <div class="flex items-center gap-3 px-3 py-3 bg-white border-b border-cinza-100">
+          <button onclick="chat_e_suporte_voltarLista()" class="w-8 h-8 flex items-center justify-center rounded-full hover:bg-cinza-100 transition-colors active:scale-95 flex-shrink-0">
+            <svg class="w-5 h-5 text-cinza-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5"/></svg>
+          </button>
+          <div id="cs-chat-avatar" class="w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-display font-bold text-white text-sm"></div>
+          <div class="flex-1 min-w-0">
+            <p id="cs-chat-nome" class="font-display font-semibold text-sm text-cinza-900 truncate"></p>
+            <p id="cs-chat-status" class="text-xs text-verde-600">online</p>
+          </div>
+          <button onclick="chat_e_suporte_chamada()" class="w-9 h-9 flex items-center justify-center rounded-full bg-marca-50 hover:bg-marca-100 transition-colors active:scale-95 flex-shrink-0" title="Chamada de voz">
+            <svg class="w-5 h-5 text-marca-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.04 12.04 0 01-7.143-7.143c-.162-.441.004-.928.38-1.211l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>
+          </button>
+          <button onclick="chat_e_suporte_videochamada()" class="w-9 h-9 flex items-center justify-center rounded-full bg-marca-50 hover:bg-marca-100 transition-colors active:scale-95 flex-shrink-0" title="Chamada de vídeo">
+            <svg class="w-5 h-5 text-marca-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 10.5l4.72-4.72a.75.75 0 011.28.53v11.38a.75.75 0 01-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 002.25-2.25v-9a2.25 2.25 0 00-2.25-2.25h-9A2.25 2.25 0 002.25 7.5v9a2.25 2.25 0 002.25 2.25z"/></svg>
+          </button>
+        </div>
+        <div id="cs-messages" class="flex-1 overflow-y-auto px-3 py-3 space-y-2.5" style="min-height:0"></div>
+        <div id="cs-typing" class="hidden px-4 pb-1">
+          <div class="flex items-center gap-2">
+            <div class="flex gap-0.5">
+              <span class="w-1.5 h-1.5 bg-cinza-400 rounded-full animate-bounce" style="animation-delay:0ms"></span>
+              <span class="w-1.5 h-1.5 bg-cinza-400 rounded-full animate-bounce" style="animation-delay:150ms"></span>
+              <span class="w-1.5 h-1.5 bg-cinza-400 rounded-full animate-bounce" style="animation-delay:300ms"></span>
+            </div>
+            <span id="cs-typing-name" class="text-xs text-cinza-500"></span>
+          </div>
+        </div>
+        <div class="px-3 py-2.5 bg-white border-t border-cinza-100">
+          <div id="cs-attach-preview" class="hidden mb-2 p-2 bg-cinza-50 rounded-lg flex items-center gap-2">
+            <svg class="w-5 h-5 text-cinza-400 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-5.699l.01-.01"/></svg>
+            <span id="cs-attach-name" class="text-xs text-cinza-600 flex-1 truncate"></span>
+            <button onclick="chat_e_suporte_removerAnexo()" class="w-5 h-5 flex items-center justify-center rounded-full hover:bg-cinza-200 transition-colors flex-shrink-0">
+              <svg class="w-3.5 h-3.5 text-cinza-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+          </div>
+          <div class="flex items-end gap-2">
+            <button onclick="chat_e_suporte_abrirAnexo()" class="w-9 h-9 flex items-center justify-center rounded-full bg-cinza-100 hover:bg-cinza-200 transition-colors active:scale-95 flex-shrink-0 mb-0.5">
+              <svg class="w-5 h-5 text-cinza-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-5.699l.01-.01"/></svg>
+            </button>
+            <div class="flex-1 relative">
+              <textarea id="cs-msg-input" rows="1" placeholder="Escreva uma mensagem..." class="w-full px-3.5 py-2.5 bg-cinza-100 border border-cinza-200 rounded-2xl text-sm font-body text-cinza-900 placeholder:text-cinza-400 focus:outline-none focus:ring-2 focus:ring-marca-500 resize-none" style="max-height:100px" onkeydown="chat_e_suporte_keydown(event)"></textarea>
+              <button onclick="chat_e_suporte_emoji()" class="absolute right-2.5 top-1/2 -translate-y-1/2 w-7 h-7 flex items-center justify-center rounded-full hover:bg-cinza-200 transition-colors" title="Emojis">
+                <svg class="w-5 h-5 text-cinza-400 hover:text-cinza-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15.182 15.182a4.5 4.5 0 01-6.364 0M21 12a9 9 0 11-18 0 9 9 0 0118 0zM7.5 10.5a.375.375 0 11.75 0 .375.375 0 01-.75 0zm3.75 2.25a.375.375 0 11.75 0 .375.375 0 01-.75 0z"/></svg>
+              </button>
+            </div>
+            <button id="cs-send-btn" onclick="chat_e_suporte_enviar()" class="w-9 h-9 flex items-center justify-center rounded-full bg-marca-600 hover:bg-marca-700 active:scale-95 transition-all shadow-sm flex-shrink-0 mb-0.5">
+              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <script>
+    (function(){
+    'use strict';
+    const CS_DATA_KEY = 'cs_state';
+    var csState = { chatId:null, filtro:'todas', search:'', anexo:null };
+    function getCorInicial(nome) {
+      var cores = ['bg-roxo-600','bg-azul-600','bg-verde-600','bg-ambar-600','bg-rosa-600','bg-ciano-600','bg-laranja-600','bg-indigo-600'];
+      var idx = 0; for(var i=0;i<nome.length;i++) idx = (idx + nome.charCodeAt(i)) % cores.length;
+      return cores[idx];
+    }
+    function getIniciais(nome) {
+      var p = nome.split(' '); return (p[0][0] + (p.length>1 ? p[p.length-1][0] : '')).toUpperCase();
+    }
+    function now() { var d=new Date(); return d.getHours().toString().padStart(2,'0')+':'+d.getMinutes().toString().padStart(2,'0'); }
+    function hoje() { return new Date().toISOString().split('T')[0]; }
+    var conversas = [
+      { id:1, nome:'Ana Beatriz F. Lima', inicial:'AL', cor:getCorInicial('Ana Beatriz F. Lima'), tipo:'cliente', online:true, naoLidas:2, ultimaMsg:'Ótimo! Confirmo o horário então.', ultimaHora:'14:32', data:hoje(),
+        mensagens:[
+          { tipo:'recebida', texto:'Olá! Gostaria de agendar uma visita técnica para meu apartamento.', hora:'10:15', data:hoje() },
+          { tipo:'enviada', texto:'Olá Ana! Claro, temos disponibilidade para amanhã às 14h ou quinta-feira às 10h. Qual prefere?', hora:'10:22', data:hoje() },
+          { tipo:'recebida', texto:'Quinta-feira às 10h fica perfeito! Endereço: Rua das Palmeiras, 342, Jardim Europa.', hora:'11:05', data:hoje() },
+          { tipo:'enviada', texto:'Perfeito! Anotei aqui: quinta-feira 10h, Rua das Palmeiras 342. Vou enviar um técnico.', hora:'11:08', data:hoje() },
+          { tipo:'recebida', texto:'Ótimo! Confirmo o horário então.', hora:'14:32', data:hoje() }
+        ]},
+      { id:2, nome:'Dr. Carlos Mendes', inicial:'CM', cor:getCorInicial('Dr. Carlos Mendes'), tipo:'equipe', online:true, naoLidas:0, ultimaMsg:'Relatório do mês enviado. 12 atendimentos.', ultimaHora:'13:10', data:hoje(),
+        mensagens:[
+          { tipo:'recebida', texto:'Bom dia! Precisamos revisar os orçamentos pendentes da semana.', hora:'09:00', data:hoje() },
+          { tipo:'enviada', texto:'Bom dia Dr. Carlos! Já estou separando os três pendentes.', hora:'09:05', data:hoje() },
+          { tipo:'recebida', texto:'Ótimo. O da Tech Solutions precisa urgência, cliente solicitou prazo.', hora:'09:10', data:hoje() },
+          { tipo:'enviada', texto:'Entendido. Vou priorizar e envio até às 14h.', hora:'09:12', data:hoje() },
+          { tipo:'recebida', texto:'Relatório do mês enviado. 12 atendimentos.', hora:'13:10', data:hoje() }
+        ]},
+      { id:3, nome:'Fernanda Oliveira', inicial:'FO', cor:getCorInicial('Fernanda Oliveira'), tipo:'cliente', online:false, naoLidas:1, ultimaMsg:'Quando ficará pronto o projeto?', ultimaHora:'12:45', data:hoje(),
+        mensagens:[
+          { tipo:'enviada', texto:'Olá Fernanda! Tudo bem? Gostaria de saber o status do seu projeto.', hora:'11:30', data:hoje() },
+          { tipo:'recebida', texto:'Oi! Estou ansiosa. Quando ficará pronto o projeto?', hora:'12:45', data:hoje() }
+        ]},
+      { id:4, nome:'Suporte da Plataforma', inicial:'SP', cor:'bg-teal-600', tipo:'suporte', online:true, naoLidas:0, ultimaMsg:'Estamos à disposição para ajudar.', ultimaHora:'Ontem', data:hoje(),
+        mensagens:[
+          { tipo:'recebida', texto:'Olá! Bem-vindo(a) à Polis. Como podemos ajudar?', hora:'Ontem', data:hoje() },
+          { tipo:'enviada', texto:'Obrigado! Tenho uma dúvida sobre o cadastro.', hora:'Ontem', data:hoje() },
+          { tipo:'recebida', texto:'Claro! Qual sua dúvida sobre o cadastro?', hora:'Ontem', data:hoje() },
+          { tipo:'enviada', texto:'Preciso atualizar meus documentos. Onde faço isso?', hora:'Ontem', data:hoje() },
+          { tipo:'recebida', texto:'Vá em Perfil > Documentos e faça o upload dos arquivos atualizados.', hora:'Ontem', data:hoje() }
+        ]},
+      { id:5, nome:'Ricardo Santos', inicial:'RS', cor:getCorInicial('Ricardo Santos'), tipo:'cliente', online:false, naoLidas:0, ultimaMsg:'Obrigado pelo atendimento!', ultimaHora:'09:30', data:hoje(),
+        mensagens:[
+          { tipo:'enviada', texto:'Olá Ricardo! Seu pedido #1087 foi aprovado e enviado para produção.', hora:'09:15', data:hoje() },
+          { tipo:'recebida', texto:'Obrigado pelo atendimento!', hora:'09:30', data:hoje() }
+        ]},
+      { id:6, nome:'Dra. Patrícia Souza', inicial:'PS', cor:getCorInicial('Dra. Patrícia Souza'), tipo:'equipe', online:true, naoLidas:0, ultimaMsg:'Reunião confirmada para sexta.', ultimaHora:'Ontem', data:hoje(),
+        mensagens:[
+          { tipo:'recebida', texto:'Bom dia! Podemos marcar a reunião de alinhamento?', hora:'Ontem', data:hoje() },
+          { tipo:'enviada', texto:'Claro, Dra. Patrícia! Sexta-feira às 15h?', hora:'Ontem', data:hoje() },
+          { tipo:'recebida', texto:'Reunião confirmada para sexta.', hora:'Ontem', data:hoje() }
+        ]},
+      { id:7, nome:'Juliana Ferreira', inicial:'JF', cor:getCorInicial('Juliana Ferreira'), tipo:'cliente', online:true, naoLidas:3, ultimaMsg:'Preciso alterar a data do agendamento.', ultimaHora:'15:00', data:hoje(),
+        mensagens:[
+          { tipo:'recebida', texto:'Oi! Preciso alterar a data do agendamento.', hora:'14:50', data:hoje() },
+          { tipo:'recebida', texto:'É urgente, por favor.', hora:'14:55', data:hoje() },
+          { tipo:'recebida', texto:'Preciso alterar a data do agendamento.', hora:'15:00', data:hoje() }
+        ]},
+      { id:8, nome:'Marcos Vinícius', inicial:'MV', cor:getCorInicial('Marcos Vinícius'), tipo:'cliente', online:false, naoLidas:0, ultimaMsg:'Aguardo retorno sobre a proposta.', ultimaHora:'Segunda', data:hoje(),
+        mensagens:[
+          { tipo:'recebida', texto:'Enviei a documentação pelo site.', hora:'Segunda', data:hoje() },
+          { tipo:'enviada', texto:'Recebido, Marcos! Estamos analisando e em breve enviamos a proposta.', hora:'Segunda', data:hoje() },
+          { tipo:'recebida', texto:'Aguardo retorno sobre a proposta.', hora:'Segunda', data:hoje() }
+        ]}
+    ];
+    var avataresSVG = { email:'<svg class=\"w-4 h-4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75\"/></svg>', document:'<svg class=\"w-4 h-4\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m.75 12l3 3m0 0l3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z\"/></svg>' };
+    function formatarHora(h) { if(h==='Agora') return h; if(h==='Ontem') return 'Ontem'; return h; }
+    function renderLista(filtro, busca) {
+      var list = document.getElementById('cs-list');
+      var empty = document.getElementById('cs-conversa-empty');
+      var itens = conversas.filter(function(c){
+        if(filtro==='nao-lidas' && c.naoLidas===0) return false;
+        if(filtro==='ativas' && !c.online) return false;
+        if(busca) {
+          var q = busca.toLowerCase();
+          return c.nome.toLowerCase().indexOf(q)>-1 || c.ultimaMsg.toLowerCase().indexOf(q)>-1;
+        }
+        return true;
+      }).sort(function(a,b){ return b.id - a.id; });
+      if(itens.length===0) { list.innerHTML=''; empty.classList.remove('hidden'); return; }
+      empty.classList.add('hidden');
+      var html = '';
+      itens.forEach(function(c){
+        var tipoBadge = c.tipo==='equipe' ? '<span class="text-[10px] bg-azul-100 text-azul-700 px-1.5 py-0.5 rounded-full font-medium">Equipe</span>' : c.tipo==='suporte' ? '<span class="text-[10px] bg-teal-100 text-teal-700 px-1.5 py-0.5 rounded-full font-medium">Suporte</span>' : '';
+        html += '<div class="card flex items-center gap-3 p-3 cursor-pointer hover:shadow-md active:scale-[0.98] transition-all" onclick="chat_e_suporte_abrirConversa('+c.id+')">';
+        html += '<div class="relative flex-shrink-0">';
+        html += '<div class="w-12 h-12 rounded-full '+c.cor+' flex items-center justify-center text-white font-display font-bold text-sm">'+c.inicial+'</div>';
+        if(c.online) html += '<span class="absolute -bottom-0.5 -right-0.5 w-3.5 h-3.5 bg-verde-500 border-2 border-white rounded-full"></span>';
+        html += '</div>';
+        html += '<div class="flex-1 min-w-0">';
+        html += '<div class="flex items-center justify-between"><p class="font-display font-semibold text-sm text-cinza-900 truncate">'+c.nome+'</p><span class="text-[11px] text-cinza-400 flex-shrink-0 ml-2">'+formatarHora(c.ultimaHora)+'</span></div>';
+        html += '<div class="flex items-center justify-between mt-0.5"><p class="text-xs text-cinza-500 truncate pr-2">'+c.ultimaMsg+'</p>';
+        if(c.naoLidas>0) html += '<span class="badge flex-shrink-0">'+c.naoLidas+'</span>';
+        html += '</div>';
+        html += tipoBadge;
+        html += '</div></div>';
+      });
+      list.innerHTML = html;
+    }
+    window.chat_e_suporte_abrirConversa = function(id) {
+      var c = conversas.find(function(x){return x.id===id;}); if(!c) return;
+      c.naoLidas = 0;
+      csState.chatId = id;
+      document.getElementById('cs-view-list').classList.add('hidden');
+      document.getElementById('cs-view-chat').classList.remove('hidden');
+      document.getElementById('cs-view-chat').classList.add('flex');
+      document.getElementById('cs-chat-nome').textContent = c.nome;
+      var av = document.getElementById('cs-chat-avatar');
+      av.className = 'w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 font-display font-bold text-white text-sm '+c.cor;
+      av.textContent = c.inicial;
+      document.getElementById('cs-chat-status').innerHTML = c.online ? '<span class="inline-flex items-center gap-1"><span class="w-1.5 h-1.5 bg-verde-500 rounded-full"></span>online</span>' : '<span class="text-cinza-400">offline</span>';
+      renderMensagens(c);
+      renderLista(csState.filtro, csState.search);
+      document.getElementById('cs-msg-input').focus();
+    };
+    window.chat_e_suporte_voltarLista = function() {
+      csState.chatId = null;
+      document.getElementById('cs-view-chat').classList.add('hidden');
+      document.getElementById('cs-view-chat').classList.remove('flex');
+      document.getElementById('cs-view-list').classList.remove('hidden');
+      renderLista(csState.filtro, csState.search);
+    };
+    function renderMensagens(c) {
+      var el = document.getElementById('cs-messages');
+      if(!c || !c.mensagens.length) { el.innerHTML = ''; return; }
+      var html = '', lastDate = '';
+      c.mensagens.forEach(function(m) {
+        if(m.data !== lastDate) {
+          lastDate = m.data;
+          var label = m.data===hoje() ? 'Hoje' : m.data;
+          html += '<div class="flex justify-center my-3"><span class="text-[10px] text-cinza-400 bg-cinza-100 px-3 py-1 rounded-full">'+label+'</span></div>';
+        }
+        var isEnviada = m.tipo==='enviada';
+        html += '<div class="flex '+ (isEnviada ? 'justify-end' : 'justify-start') + '">';
+        html += '<div class="max-w-[78%] px-3.5 py-2.5 text-sm leading-relaxed '+(isEnviada ? 'bg-verde-600 text-white rounded-2xl rounded-br-sm' : 'bg-white text-cinza-800 border border-cinza-100 rounded-2xl rounded-bl-sm shadow-sm')+'">';
+        html += m.texto;
+        if(m.anexo) { html += '<div class="mt-1.5 flex items-center gap-1.5 '+ (isEnviada?'text-green-100':'text-cinza-500') +'"><svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width=\"2\" viewBox=\"0 0 24 24\"><path stroke-linecap=\"round\" stroke-linejoin=\"round\" d=\"M18.375 12.739l-7.693 7.693a4.5 4.5 0 01-6.364-6.364l10.94-10.94A3 3 0 1119.5 7.372L8.552 18.32m.009-.01l-.01.01m5.699-5.699l.01-.01\"/></svg><span class="text-xs truncate">'+m.anexo+'</span></div>'; }
+        html += '<p class="text-[10px] mt-1 '+ (isEnviada ? 'text-green-200' : 'text-cinza-400') +' text-right">'+m.hora+(isEnviada?' ✓✓':'')+'</p>';
+        html += '</div></div>';
+      });
+      el.innerHTML = html;
+      el.scrollTop = el.scrollHeight;
+    }
+    window.chat_e_suporte_enviar = function() {
+      var inp = document.getElementById('cs-msg-input');
+      var texto = inp.value.trim();
+      if(!texto && !csState.anexo) return;
+      var c = conversas.find(function(x){return x.id===csState.chatId;});
+      if(!c) return;
+      var msg = { tipo:'enviada', texto:texto || 'Arquivo anexado', hora:now(), data:hoje() };
+      if(csState.anexo) { msg.anexo = csState.anexo; }
+      c.mensagens.push(msg);
+      c.ultimaMsg = msg.texto; c.ultimaHora = msg.hora;
+      inp.value = ''; inp.style.height = 'auto'; chat_e_suporte_removerAnexo();
+      renderMensagens(c);
+      document.getElementById('cs-chat-nome').textContent = c.nome;
+      if(c.tipo!=='suporte') {
+        var typingEl = document.getElementById('cs-typing');
+        document.getElementById('cs-typing-name').textContent = c.nome+' está digitando...';
+        typingEl.classList.remove('hidden');
+        setTimeout(function(){ typingEl.classList.add('hidden'); var resp = {tipo:'recebida',texto:'Recebi sua mensagem! Vou responder em breve.',hora:now(),data:hoje()}; c.mensagens.push(resp); c.ultimaMsg=resp.texto; renderMensagens(c); toast('Nova mensagem de '+c.nome,'info'); },2200);
+      }
+    };
+    window.chat_e_suporte_keydown = function(e) {
+      if(e.key==='Enter' && !e.shiftKey) { e.preventDefault(); chat_e_suporte_enviar(); }
+    };
+    var ta = document.getElementById('cs-msg-input');
+    if(ta) ta.addEventListener('input',function(){ this.style.height='auto'; this.style.height=Math.min(this.scrollHeight,100)+'px'; });
+    window.chat_e_suporte_abrirAnexo = function() {
+      var nomes = ['orcamento_atualizado.pdf','foto_projeto.jpg','documento_assinado.pdf'];
+      var aleatorio = nomes[Math.floor(Math.random()*nomes.length)];
+      csState.anexo = aleatorio;
+      document.getElementById('cs-attach-preview').classList.remove('hidden');
+      document.getElementById('cs-attach-name').textContent = aleatorio;
+      toast('Anexo: '+aleatorio+' adicionado','info');
+    };
+    window.chat_e_suporte_removerAnexo = function() {
+      csState.anexo = null;
+      document.getElementById('cs-attach-preview').classList.add('hidden');
+    };
+    window.chat_e_suporte_emoji = function() {
+      var emojis = ['😊','👍','🎉','✅','🙏','💪','📋','📅','⭐','🤝','💡','📎'];
+      var el = document.getElementById('cs-msg-input');
+      el.value += emojis[Math.floor(Math.random()*emojis.length)];
+      el.focus();
+    };
+    window.chat_e_suporte_abrirSuporte = function() {
+      var sup = conversas.find(function(x){return x.tipo==='suporte';});
+      if(sup) chat_e_suporte_abrirConversa(sup.id);
+    };
+    window.chat_e_suporte_chamada = function() { toast('Iniciando chamada de voz...','info'); };
+    window.chat_e_suporte_videochamada = function() { toast('Iniciando vídeo chamada...','info'); };
+    window.chat_e_suporte_filtrar = function(f) {
+      csState.filtro = f;
+      document.querySelectorAll('.cs-filter-btn').forEach(function(b){ b.className='cs-filter-btn flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium bg-cinza-100 text-cinza-600 hover:bg-cinza-200 transition-all'; });
+      document.getElementById('cs-filter-'+f.replace('nao-lidas','unread')).className='cs-filter-btn flex-shrink-0 px-3 py-1.5 rounded-full text-xs font-medium bg-marca-600 text-white transition-all';
+      renderLista(f, csState.search);
+    };
+    window.chat_e_suporte_buscar = function(q) { csState.search = q; renderLista(csState.filtro, q); };
+    window.mostrarTela = window.mostrarTela || function(){};
+    function init() {
+      renderLista('todas','');
+      document.getElementById('cs-view-chat').classList.add('hidden');
+      document.getElementById('cs-view-chat').classList.remove('flex');
+      document.getElementById('cs-view-list').classList.remove('hidden');
+    }
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',init); else init();
+    })();
+    </script>
+
     <!-- TELAS -->
         </div>
 
