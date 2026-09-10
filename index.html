@@ -736,6 +736,543 @@
   })();
 </script>
 
+    <section data-tela="pedido-e-orcamento" class="hidden">
+      <div id="pedido-e-orcamento-content">
+        <!-- Passo 1: Formulário de solicitação -->
+        <div id="pedido-form-step" class="space-y-4">
+          <!-- Cabeçalho da tela -->
+          <div>
+            <h1 class="text-xl font-display font-bold text-gray-900">Novo Pedido</h1>
+            <p class="text-sm text-gray-500 mt-1">Solicite um orçamento para o serviço desejado</p>
+          </div>
+
+          <!-- Info do Polinscrito -->
+          <div class="card p-4 flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-marca-100 flex items-center justify-center text-marca-700 font-bold text-sm">AM</div>
+            <div class="flex-1 min-w-0">
+              <p class="font-semibold text-sm text-gray-900 truncate">Ana Maria Santos</p>
+              <p class="text-xs text-gray-500">Polinscrita nº 04 · Membro ativa</p>
+            </div>
+            <span class="badge badge-success text-xs">Ativo</span>
+          </div>
+
+          <!-- Tipo de Serviço -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Tipo de Serviço <span class="text-red-500">*</span></label>
+            <div id="pedido-tipos-grid" class="grid grid-cols-2 gap-2">
+            </div>
+            <p id="pedido-tipo-error" class="text-xs text-red-500 mt-1 hidden">Selecione um tipo de serviço</p>
+          </div>
+
+          <!-- Selecionado - resumo -->
+          <div id="pedido-servico-selecionado" class="card p-4 border-l-4 border-marca-500 bg-marca-50 hidden">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-xs text-marca-600 font-medium uppercase tracking-wide">Serviço Selecionado</p>
+                <p id="pedido-servico-nome" class="font-display font-bold text-gray-900 mt-0.5">—</p>
+                <p id="pedido-servico-preco" class="text-sm text-marca-700 font-semibold mt-0.5">—</p>
+              </div>
+              <button onclick="pedido_e_orcamento_limpar_servico()" class="text-gray-400 hover:text-red-500 transition-colors p-1" title="Remover seleção">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Data Desejada com Calendário -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Data Desejada <span class="text-red-500">*</span></label>
+            <button type="button" onclick="pedido_e_orcamento_toggle_calendario()" class="w-full card p-3 flex items-center justify-between hover:border-marca-300 transition-colors" id="pedido-data-btn">
+              <span class="flex items-center gap-2 text-gray-500 text-sm">
+                <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                Selecione a data
+              </span>
+              <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+            </button>
+            <input type="hidden" id="pedido-data-valor" value="">
+            <p id="pedido-data-error" class="text-xs text-red-500 mt-1 hidden">Selecione uma data</p>
+
+            <!-- Calendário Interativo -->
+            <div id="pedido-calendario" class="card p-3 mt-2 hidden">
+              <div class="flex items-center justify-between mb-3">
+                <button type="button" onclick="pedido_e_orcamento_mes_anterior()" class="p-1.5 rounded-lg hover:bg-gray-100 transition-colors">
+                  <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
+                </button>
+                <span id="pedido-cal-mes" class="font-semibold text-sm text-gray-900"></span>
+                <button type="button" onclick="pedido_e_orcamento_proximo_mes()" class="p-1.5 rounded-lg hover:bg-gray-100 transition-colors">
+                  <svg class="w-5 h-5 text-gray-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
+                </button>
+              </div>
+              <div class="grid grid-cols-7 gap-0 text-center mb-1">
+                <span class="text-xs font-medium text-gray-400 py-1">Dom</span>
+                <span class="text-xs font-medium text-gray-400 py-1">Seg</span>
+                <span class="text-xs font-medium text-gray-400 py-1">Ter</span>
+                <span class="text-xs font-medium text-gray-400 py-1">Qua</span>
+                <span class="text-xs font-medium text-gray-400 py-1">Qui</span>
+                <span class="text-xs font-medium text-gray-400 py-1">Sex</span>
+                <span class="text-xs font-medium text-marca-600 py-1">Sáb</span>
+              </div>
+              <div id="pedido-cal-dias" class="grid grid-cols-7 gap-0 text-center"></div>
+              <div class="flex items-center gap-2 mt-3 pt-2 border-t border-gray-100">
+                <div class="w-3 h-3 rounded-full bg-marca-500"></div>
+                <span class="text-xs text-gray-500">Dias úteis com vagas</span>
+                <div class="w-3 h-3 rounded-full bg-red-400 ml-2"></div>
+                <span class="text-xs text-gray-500">Sem vagas</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Horário Preferido -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Horário Preferido <span class="text-red-500">*</span></label>
+            <div id="pedido-horarios-grid" class="grid grid-cols-3 gap-2">
+            </div>
+            <p id="pedido-horario-error" class="text-xs text-red-500 mt-1 hidden">Selecione um horário</p>
+          </div>
+
+          <!-- Quantidade -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Quantidade de Participantes <span class="text-red-500">*</span></label>
+            <div class="flex items-center gap-3">
+              <button type="button" onclick="pedido_e_orcamento_quantidade(-1)" class="w-10 h-10 rounded-xl bg-gray-100 flex items-center justify-center text-gray-600 font-bold text-lg active:scale-90 transition-all hover:bg-gray-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 12h14"/></svg>
+              </button>
+              <input type="number" id="pedido-quantidade" value="1" min="1" max="30" readonly class="w-16 h-10 text-center font-semibold text-gray-900 bg-gray-50 rounded-xl border border-gray-200 text-lg">
+              <button type="button" onclick="pedido_e_orcamento_quantidade(1)" class="w-10 h-10 rounded-xl bg-marca-100 flex items-center justify-center text-marca-700 font-bold text-lg active:scale-90 transition-all hover:bg-marca-200">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              </button>
+            </div>
+            <p class="text-xs text-gray-400 mt-1">Máximo de 30 participantes</p>
+          </div>
+
+          <!-- Observações -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Observações</label>
+            <textarea id="pedido-observacoes" rows="3" placeholder="Descreva detalhes adicionais, requisitos especiais, necessidades de acessibilidade..." class="w-full rounded-xl border border-gray-200 p-3 text-sm text-gray-700 placeholder-gray-400 resize-none focus:ring-2 focus:ring-marca-300 focus:border-marca-400 transition-all"></textarea>
+          </div>
+
+          <!-- Upload de Documento/Foto -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Anexar Documento ou Foto</label>
+            <div id="pedido-upload-zone" class="card p-6 border-2 border-dashed border-gray-200 text-center cursor-pointer hover:border-marca-300 hover:bg-marca-50/50 transition-all" onclick="document.getElementById('pedido-file-input').click()">
+              <svg class="w-10 h-10 text-gray-300 mx-auto mb-2" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5"/></svg>
+              <p class="text-sm text-gray-500 font-medium">Toque para enviar um arquivo</p>
+              <p class="text-xs text-gray-400 mt-1">PDF, JPG ou PNG · até 10MB</p>
+            </div>
+            <input type="file" id="pedido-file-input" class="hidden" accept=".pdf,.jpg,.jpeg,.png" onchange="pedido_e_orcamento_handle_upload(this)">
+            <div id="pedido-upload-preview" class="hidden mt-2 card p-3 flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-marca-100 flex items-center justify-center">
+                <svg class="w-5 h-5 text-marca-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p id="pedido-upload-filename" class="text-sm font-medium text-gray-900 truncate"></p>
+                <p id="pedido-upload-size" class="text-xs text-gray-500"></p>
+              </div>
+              <button onclick="pedido_e_orcamento_remover_upload()" class="text-gray-400 hover:text-red-500 transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Resumo do Pedido -->
+          <div class="card p-4 bg-gray-50">
+            <h3 class="font-display font-bold text-gray-900 text-sm mb-3">Resumo do Pedido</h3>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between"><span class="text-gray-500">Serviço</span><span id="pedido-resumo-servico" class="text-gray-900 font-medium text-right max-w-[60%] truncate">Selecione um serviço</span></div>
+              <div class="flex justify-between"><span class="text-gray-500">Data</span><span id="pedido-resumo-data" class="text-gray-900 font-medium">—</span></div>
+              <div class="flex justify-between"><span class="text-gray-500">Horário</span><span id="pedido-resumo-horario" class="text-gray-900 font-medium">—</span></div>
+              <div class="flex justify-between"><span class="text-gray-500">Participantes</span><span id="pedido-resumo-qtd" class="text-gray-900 font-medium">1</span></div>
+              <div class="border-t border-gray-200 pt-2 flex justify-between items-center">
+                <span class="font-semibold text-gray-700">Valor estimado</span>
+                <span id="pedido-resumo-valor" class="font-display font-bold text-lg text-marca-700">R$ 0,00</span>
+              </div>
+              <p class="text-xs text-gray-400 flex items-center gap-1"><svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Valor estimado · confirmação final após análise</p>
+            </div>
+          </div>
+
+          <!-- Ações -->
+          <div class="space-y-3 pb-4">
+            <button type="button" onclick="pedido_e_orcamento_enviar()" class="btn btn-primary w-full py-3.5 text-base font-semibold rounded-2xl active:scale-[0.97] transition-all flex items-center justify-center gap-2">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+              Enviar Solicitação
+            </button>
+            <button type="button" onclick="mostrarTela('vitrine-do-marketplace')" class="btn btn-secondary w-full py-3 text-sm font-medium rounded-2xl active:scale-[0.97] transition-all">
+              Voltar ao Catálogo
+            </button>
+          </div>
+        </div>
+
+        <!-- Passo 2: Confirmação -->
+        <div id="pedido-confirmacao-step" class="hidden">
+          <div class="text-center py-8">
+            <!-- Animação de Sucesso -->
+            <div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mx-auto mb-5 animate-bounce" style="animation-duration: 0.6s; animation-iteration-count: 1;">
+              <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <h2 class="font-display font-bold text-xl text-gray-900 mb-2">Solicitação Enviada!</h2>
+            <p class="text-sm text-gray-500 mb-1">Seu pedido foi enviado com sucesso.</p>
+            <p class="text-xs text-gray-400">Você receberá a confirmação via WhatsApp</p>
+          </div>
+
+          <!-- Detalhes da Solicitação -->
+          <div class="card p-4 space-y-3">
+            <h3 class="font-display font-bold text-sm text-gray-900">Detalhes da Solicitação</h3>
+            <div class="space-y-2 text-sm">
+              <div class="flex justify-between"><span class="text-gray-500">Nº do Pedido</span><span id="pedido-conf-numero" class="font-mono font-semibold text-marca-700">#PED-2024-0042</span></div>
+              <div class="flex justify-between"><span class="text-gray-500">Serviço</span><span id="pedido-conf-servico" class="font-medium text-gray-900">—</span></div>
+              <div class="flex justify-between"><span class="text-gray-500">Data</span><span id="pedido-conf-data" class="text-gray-900">—</span></div>
+              <div class="flex justify-between"><span class="text-gray-500">Horário</span><span id="pedido-conf-horario" class="text-gray-900">—</span></div>
+              <div class="flex justify-between"><span class="text-gray-500">Participantes</span><span id="pedido-conf-qtd" class="text-gray-900">—</span></div>
+              <div class="border-t border-gray-100 pt-2 flex justify-between items-center">
+                <span class="font-semibold text-gray-700">Valor estimado</span>
+                <span id="pedido-conf-valor" class="font-display font-bold text-marca-700">—</span></div>
+            </div>
+          </div>
+
+          <!-- Notificação WhatsApp -->
+          <div class="card p-4 border-l-4 border-green-400 bg-green-50 flex items-start gap-3">
+            <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center flex-shrink-0 mt-0.5">
+              <svg class="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-green-800">Notificação WhatsApp enviada</p>
+              <p class="text-xs text-green-600 mt-0.5">Ana Maria Santos foi notificada em (11) 99876-5432</p>
+            </div>
+          </div>
+
+          <!-- Ações -->
+          <div class="space-y-3 pb-6 pt-2">
+            <button type="button" onclick="mostrarTela('meus-pedidos')" class="btn btn-primary w-full py-3.5 text-base font-semibold rounded-2xl active:scale-[0.97] transition-all flex items-center justify-center gap-2">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+              Acompanhar Pedido
+            </button>
+            <button type="button" onclick="pedido_e_orcamento_novo_pedido()" class="btn btn-secondary w-full py-3 text-sm font-medium rounded-2xl active:scale-[0.97] transition-all">
+              Fazer Outra Solicitação
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+    (function() {
+      'use strict';
+
+      const TIPOS_SERVICO = [
+        { id: 'oficina', nome: 'Oficina Cultural', preco: 120, icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 4.168 6.253v13C4.168 21.747 5.754 21.5 7.5 21.5S10.832 21.747 10.832 19.253m0-13C12.168 5.477 13.754 5 15.5 5c1.747 0 3.332.477 3.332 1.253v13C18.832 21.747 17.247 21.5 15.5 21.5c-1.746 0-3.332.477-3.332 1.253"/></svg>' },
+        { id: 'evento', nome: 'Evento Cultural', preco: 80, icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5"/></svg>' },
+        { id: 'curso', nome: 'Curso Tecnológico', preco: 200, icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342"/></svg>' },
+        { id: 'workshop', nome: 'Workshop Científico', preco: 150, icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15.59 14.37a6 6 0 01-5.84 7.38H11.5a3.5 3.5 0 110-7 3.5 3.5 0 013.5 3.5c0 .298-.03.587-.085.87M15.59 14.37A6 6 0 0111.5 10.5a3.5 3.5 0 00-3.5 3.5c0 .298.03.587.085.87M15.59 14.37L18 16.75m-2.41-1.38a6 6 0 01-5.84-7.38"/></svg>' },
+        { id: 'palestra', nome: 'Palestra & Debate', preco: 60, icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M12 18.75a6.75 6.75 0 100-13.5 6.75 6.75 0 000 13.5zM12 8.25v.008m0 4.5v.008"/></svg>' },
+        { id: 'visita', nome: 'Visita Guiada', preco: 40, icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>' },
+        { id: 'consultoria', nome: 'Consultoria', preco: 300, icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334A2.126 2.126 0 0018.377 4.5h-13.25M14.25 4.5v5.625c0 .621.504 1.125 1.125 1.125h-3.75"/></svg>' },
+        { id: 'acampamento', nome: 'Acampamento', preco: 180, icone: '<svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M18.75 21H5.25A2.25 2.25 0 013 18.75V5.25A2.25 2.25 0 015.25 3h13.5A2.25 2.25 0 0121 5.25v13.5"/></svg>' },
+      ];
+
+      const HORARIOS = [
+        { id: '08:00', rotulo: '08:00', periodo: 'Manhã' },
+        { id: '09:00', rotulo: '09:00', periodo: 'Manhã' },
+        { id: '10:00', rotulo: '10:00', periodo: 'Manhã' },
+        { id: '11:00', rotulo: '11:00', periodo: 'Manhã' },
+        { id: '14:00', rotulo: '14:00', periodo: 'Tarde' },
+        { id: '15:00', rotulo: '15:00', periodo: 'Tarde' },
+        { id: '16:00', rotulo: '16:00', periodo: 'Tarde' },
+        { id: '17:00', rotulo: '17:00', periodo: 'Tarde' },
+        { id: '19:00', rotulo: '19:00', periodo: 'Noite' },
+        { id: '20:00', rotulo: '20:00', periodo: 'Noite' },
+      ];
+
+      let pedido_e_orcamento_selecionado = {
+        servico: null,
+        data: null,
+        horario: null,
+        quantidade: 1,
+        observacoes: '',
+        arquivo: null,
+      };
+      let pedido_e_orcamento_ano = new Date().getFullYear();
+      let pedido_e_orcamento_mes = new Date().getMonth();
+      let pedido_e_orcamento_dias_indisponiveis = [2, 5, 8, 15, 22];
+
+      function pedido_e_orcamento_renderizar_tipos() {
+        const grid = document.getElementById('pedido-tipos-grid');
+        if (!grid) return;
+        grid.innerHTML = TIPOS_SERVICO.map(s => {
+          const selecionado = pedido_e_orcamento_selecionado.servico && pedido_e_orcamento_selecionado.servico.id === s.id;
+          const bg = selecionado ? 'bg-marca-50 border-marca-400 ring-2 ring-marca-200' : 'bg-white border-gray-200 hover:border-marca-300';
+          return '<button type="button" onclick="pedido_e_orcamento_selecionar_tipo(\'' + s.id + '\')" class="card p-3 text-left transition-all ' + bg + ' flex items-center gap-2.5">' +
+            '<span class="text-marca-600 flex-shrink-0">' + s.icone + '</span>' +
+            '<span class="text-xs font-semibold text-gray-900 leading-tight">' + s.nome + '</span>' +
+          '</button>';
+        }).join('');
+      }
+
+      function pedido_e_orcamento_selecionar_tipo(id) {
+        const s = TIPOS_SERVICO.find(t => t.id === id);
+        pedido_e_orcamento_selecionado.servico = s;
+        pedido_e_orcamento_atualizar_resumo();
+        pedido_e_orcamento_renderizar_tipos();
+        const sel = document.getElementById('pedido-servico-selecionado');
+        const err = document.getElementById('pedido-tipo-error');
+        if (sel) sel.classList.remove('hidden');
+        if (err) err.classList.add('hidden');
+        document.getElementById('pedido-servico-nome').textContent = s.nome;
+        document.getElementById('pedido-servico-preco').textContent = 'R$ ' + s.preco.toFixed(2).replace('.', ',') + ' / pessoa';
+      }
+
+      function pedido_e_orcamento_limpar_servico() {
+        pedido_e_orcamento_selecionado.servico = null;
+        pedido_e_orcamento_renderizar_tipos();
+        const sel = document.getElementById('pedido-servico-selecionado');
+        if (sel) sel.classList.add('hidden');
+        pedido_e_orcamento_atualizar_resumo();
+      }
+
+      function pedido_e_orcamento_renderizar_horarios() {
+        const grid = document.getElementById('pedido-horarios-grid');
+        if (!grid) return;
+        grid.innerHTML = HORARIOS.map(h => {
+          const sel = pedido_e_orcamento_selecionado.horario && pedido_e_orcamento_selecionado.horario.id === h.id;
+          const cls = sel ? 'bg-marca-500 text-white border-marca-500 ring-2 ring-marca-200' : 'bg-white border-gray-200 text-gray-700 hover:border-marca-300';
+          return '<button type="button" onclick="pedido_e_orcamento_selecionar_horario(\'' + h.id + '\')" class="py-2 px-3 rounded-xl border text-xs font-semibold transition-all active:scale-95 ' + cls + '">' + h.rotulo + '</button>';
+        }).join('');
+      }
+
+      function pedido_e_orcamento_selecionar_horario(id) {
+        const h = HORARIOS.find(x => x.id === id);
+        pedido_e_orcamento_selecionado.horario = h;
+        pedido_e_orcamento_renderizar_horarios();
+        const err = document.getElementById('pedido-horario-error');
+        if (err) err.classList.add('hidden');
+        pedido_e_orcamento_atualizar_resumo();
+      }
+
+      function pedido_e_orcamento_toggle_calendario() {
+        const cal = document.getElementById('pedido-calendario');
+        if (cal) {
+          cal.classList.toggle('hidden');
+          if (!cal.classList.contains('hidden')) pedido_e_orcamento_renderizar_calendario();
+        }
+      }
+
+      function pedido_e_orcamento_renderizar_calendario() {
+        const meses = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+        const mesEl = document.getElementById('pedido-cal-mes');
+        if (mesEl) mesEl.textContent = meses[pedido_e_orcamento_mes] + ' ' + pedido_e_orcamento_ano;
+
+        const container = document.getElementById('pedido-cal-dias');
+        if (!container) return;
+
+        const primeiroDia = new Date(pedido_e_orcamento_ano, pedido_e_orcamento_mes, 1);
+        const ultimoDia = new Date(pedido_e_orcamento_ano, pedido_e_orcamento_mes + 1, 0);
+        const hoje = new Date();
+        hoje.setHours(0, 0, 0, 0);
+
+        let html = '';
+        for (let i = 0; i < primeiroDia.getDay(); i++) html += '<span class="py-1.5"></span>';
+
+        for (let d = 1; d <= ultimoDia.getDate(); d++) {
+          const data = new Date(pedido_e_orcamento_ano, pedido_e_orcamento_mes, d);
+          const domingo = data.getDay() === 0;
+          const indisponivel = pedido_e_orcamento_dias_indisponiveis.includes(d) || data < hoje;
+          const selecionado = pedido_e_orcamento_selecionado.data && pedido_e_orcamento_selecionado.data.getDate() === d && pedido_e_orcamento_selecionado.data.getMonth() === pedido_e_orcamento_mes && pedido_e_orcamento_selecionado.data.getFullYear() === pedido_e_orcamento_ano;
+
+          if (domingo || indisponivel && !selecionado) {
+            html += '<span class="py-1.5 text-xs text-gray-300">' + d + '</span>';
+          } else {
+            const bgCls = selecionado ? 'bg-marca-500 text-white' : (indisponivel ? 'bg-red-50 text-red-300 line-through cursor-not-allowed' : 'text-gray-700 hover:bg-marca-50 cursor-pointer');
+            html += '<button type="button" onclick="pedido_e_orcamento_selecionar_data(' + pedido_e_orcamento_ano + ',' + pedido_e_orcamento_mes + ',' + d + ')" class="py-1.5 text-xs rounded-lg font-medium transition-all ' + bgCls + '">' + d + '</button>';
+          }
+        }
+        container.innerHTML = html;
+      }
+
+      function pedido_e_orcamento_selecionar_data(ano, mes, dia) {
+        const data = new Date(ano, mes, dia);
+        if (data < new Date(new Date().setHours(0, 0, 0, 0))) return;
+        pedido_e_orcamento_selecionado.data = data;
+        pedido_e_orcamento_renderizar_calendario();
+        const btn = document.getElementById('pedido-data-btn');
+        if (btn) {
+          const sp = btn.querySelector('span');
+          if (sp) {
+            const dias = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+            sp.innerHTML = '<svg class="w-5 h-5 text-marca-500" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>' + dias[data.getDay()] + ', ' + dia + '/' + String(mes + 1).padStart(2, '0') + '/' + ano;
+          }
+        }
+        document.getElementById('pedido-data-valor').value = ano + '-' + String(mes + 1).padStart(2, '0') + '-' + String(dia).padStart(2, '0');
+        const err = document.getElementById('pedido-data-error');
+        if (err) err.classList.add('hidden');
+        pedido_e_orcamento_atualizar_resumo();
+        const cal = document.getElementById('pedido-calendario');
+        if (cal) cal.classList.add('hidden');
+      }
+
+      function pedido_e_orcamento_mes_anterior() {
+        pedido_e_orcamento_mes--;
+        if (pedido_e_orcamento_mes < 0) { pedido_e_orcamento_mes = 11; pedido_e_orcamento_ano--; }
+        pedido_e_orcamento_renderizar_calendario();
+      }
+
+      function pedido_e_orcamento_proximo_mes() {
+        pedido_e_orcamento_mes++;
+        if (pedido_e_orcamento_mes > 11) { pedido_e_orcamento_mes = 0; pedido_e_orcamento_ano++; }
+        pedido_e_orcamento_renderizar_calendario();
+      }
+
+      function pedido_e_orcamento_quantidade(delta) {
+        const inp = document.getElementById('pedido-quantidade');
+        if (!inp) return;
+        let v = parseInt(inp.value) || 1;
+        v = Math.max(1, Math.min(30, v + delta));
+        inp.value = v;
+        pedido_e_orcamento_selecionado.quantidade = v;
+        pedido_e_orcamento_atualizar_resumo();
+      }
+
+      function pedido_e_orcamento_atualizar_resumo() {
+        const s = document.getElementById('pedido-resumo-servico');
+        const d = document.getElementById('pedido-resumo-data');
+        const h = document.getElementById('pedido-resumo-horario');
+        const q = document.getElementById('pedido-resumo-qtd');
+        const v = document.getElementById('pedido-resumo-valor');
+
+        if (s) s.textContent = pedido_e_orcamento_selecionado.servico ? pedido_e_orcamento_selecionado.servico.nome : 'Selecione um serviço';
+        if (d) d.textContent = pedido_e_orcamento_selecionado.data ? dataBR(pedido_e_orcamento_selecionado.data.toISOString()) : '—';
+        if (h) h.textContent = pedido_e_orcamento_selecionado.horario ? pedido_e_orcamento_selecionado.horario.rotulo + 'h' : '—';
+        if (q) q.textContent = pedido_e_orcamento_selecionado.quantidade;
+        const inpQ = document.getElementById('pedido-quantidade');
+        if (inpQ) pedido_e_orcamento_selecionado.quantidade = parseInt(inpQ.value) || 1;
+        if (v) {
+          const preco = (pedido_e_orcamento_selecionado.servico ? pedido_e_orcamento_selecionado.servico.preco : 0);
+          const total = preco * pedido_e_orcamento_selecionado.quantidade;
+          v.textContent = 'R$ ' + total.toFixed(2).replace('.', ',');
+        }
+      }
+
+      function pedido_e_orcamento_handle_upload(input) {
+        if (input.files && input.files[0]) {
+          pedido_e_orcamento_selecionado.arquivo = input.files[0];
+          const preview = document.getElementById('pedido-upload-preview');
+          const fname = document.getElementById('pedido-upload-filename');
+          const fsize = document.getElementById('pedido-upload-size');
+          if (preview) preview.classList.remove('hidden');
+          if (fname) fname.textContent = input.files[0].name;
+          if (fsize) fsize.textContent = (input.files[0].size / 1024).toFixed(1) + ' KB';
+          toast('Arquivo anexado com sucesso', 'ok');
+        }
+      }
+
+      function pedido_e_orcamento_remover_upload() {
+        pedido_e_orcamento_selecionado.arquivo = null;
+        const input = document.getElementById('pedido-file-input');
+        if (input) input.value = '';
+        const preview = document.getElementById('pedido-upload-preview');
+        if (preview) preview.classList.add('hidden');
+      }
+
+      function pedido_e_orcamento_validar() {
+        let valido = true;
+        if (!pedido_e_orcamento_selecionado.servico) {
+          const err = document.getElementById('pedido-tipo-error');
+          if (err) err.classList.remove('hidden');
+          valido = false;
+        }
+        if (!pedido_e_orcamento_selecionado.data) {
+          const err = document.getElementById('pedido-data-error');
+          if (err) err.classList.remove('hidden');
+          valido = false;
+        }
+        if (!pedido_e_orcamento_selecionado.horario) {
+          const err = document.getElementById('pedido-horario-error');
+          if (err) err.classList.remove('hidden');
+          valido = false;
+        }
+        return valido;
+      }
+
+      function pedido_e_orcamento_enviar() {
+        if (!pedido_e_orcamento_validar()) {
+          toast('Preencha todos os campos obrigatórios', 'erro');
+          return;
+        }
+        pedido_e_orcamento_selecionado.observacoes = document.getElementById('pedido-observacoes') ? document.getElementById('pedido-observacoes').value : '';
+        const numPedido = '#PED-' + new Date().getFullYear() + '-' + String(Math.floor(Math.random() * 9000) + 1000);
+        const steps = document.querySelectorAll('#pedido-e-orcamento-content > div');
+        steps.forEach(s => s.classList.add('hidden'));
+
+        const conf = document.getElementById('pedido-confirmacao-step');
+        if (conf) conf.classList.remove('hidden');
+
+        const precoUnit = pedido_e_orcamento_selecionado.servico ? pedido_e_orcamento_selecionado.servico.preco : 0;
+        const total = precoUnit * pedido_e_orcamento_selecionado.quantidade;
+        const dataStr = pedido_e_orcamento_selecionado.data ? dataBR(pedido_e_orcamento_selecionado.data.toISOString()) : '—';
+
+        const setText = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+        setText('pedido-conf-numero', numPedido);
+        setText('pedido-conf-servico', pedido_e_orcamento_selecionado.servico ? pedido_e_orcamento_selecionado.servico.nome : '—');
+        setText('pedido-conf-data', dataStr);
+        setText('pedido-conf-horario', pedido_e_orcamento_selecionado.horario ? pedido_e_orcamento_selecionado.horario.rotulo + 'h' : '—');
+        setText('pedido-conf-qtd', String(pedido_e_orcamento_selecionado.quantidade) + ' participante' + (pedido_e_orcamento_selecionado.quantidade > 1 ? 's' : ''));
+        setText('pedido-conf-valor', 'R$ ' + total.toFixed(2).replace('.', ','));
+
+        toast('Solicitação enviada com sucesso!', 'ok');
+      }
+
+      window.pedido_e_orcamento_novo_pedido = function() {
+        pedido_e_orcamento_selecionado = { servico: null, data: null, horario: null, quantidade: 1, observacoes: '', arquivo: null };
+        pedido_e_orcamento_selecionado.quantidade = 1;
+        const inp = document.getElementById('pedido-quantidade');
+        if (inp) inp.value = '1';
+        const obs = document.getElementById('pedido-observacoes');
+        if (obs) obs.value = '';
+        const btn = document.getElementById('pedido-data-btn');
+        if (btn) {
+          const sp = btn.querySelector('span');
+          if (sp) sp.innerHTML = '<svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Selecione a data';
+        }
+        const dataInp = document.getElementById('pedido-data-valor');
+        if (dataInp) dataInp.value = '';
+        const selDiv = document.getElementById('pedido-servico-selecionado');
+        if (selDiv) selDiv.classList.add('hidden');
+        document.querySelectorAll('#pedido-e-orcamento-content > div').forEach(s => s.classList.add('hidden'));
+        const form = document.getElementById('pedido-form-step');
+        if (form) form.classList.remove('hidden');
+        pedido_e_orcamento_renderizar_tipos();
+        pedido_e_orcamento_renderizar_horarios();
+        pedido_e_orcamento_atualizar_resumo();
+      };
+
+      window.pedido_e_orcamento_selecionar_tipo = pedido_e_orcamento_selecionar_tipo;
+      window.pedido_e_orcamento_limpar_servico = pedido_e_orcamento_limpar_servico;
+      window.pedido_e_orcamento_selecionar_horario = pedido_e_orcamento_selecionar_horario;
+      window.pedido_e_orcamento_toggle_calendario = pedido_e_orcamento_toggle_calendario;
+      window.pedido_e_orcamento_selecionar_data = pedido_e_orcamento_selecionar_data;
+      window.pedido_e_orcamento_mes_anterior = pedido_e_orcamento_mes_anterior;
+      window.pedido_e_orcamento_proximo_mes = pedido_e_orcamento_proximo_mes;
+      window.pedido_e_orcamento_quantidade = pedido_e_orcamento_quantidade;
+      window.pedido_e_orcamento_handle_upload = pedido_e_orcamento_handle_upload;
+      window.pedido_e_orcamento_remover_upload = pedido_e_orcamento_remover_upload;
+      window.pedido_e_orcamento_enviar = pedido_e_orcamento_enviar;
+      window.pedido_e_orcamento_novo_pedido = window.pedido_e_orcamento_novo_pedido;
+      window.pedido_e_orcamento_atualizar_resumo = pedido_e_orcamento_atualizar_resumo;
+
+      function pedido_e_orcamento_init() {
+        pedido_e_orcamento_renderizar_tipos();
+        pedido_e_orcamento_renderizar_horarios();
+        pedido_e_orcamento_atualizar_resumo();
+        document.querySelectorAll('#pedido-e-orcamento-content > div').forEach(s => s.classList.add('hidden'));
+        const form = document.getElementById('pedido-form-step');
+        if (form) form.classList.remove('hidden');
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', pedido_e_orcamento_init);
+      } else {
+        pedido_e_orcamento_init();
+      }
+    })();
+    </script>
+
     <!-- TELAS -->
         </div>
 
