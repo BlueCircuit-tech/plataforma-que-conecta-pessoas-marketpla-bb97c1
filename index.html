@@ -3322,6 +3322,463 @@
 
 </section>
 
+    <section data-tela="perfil-e-documentos" class="hidden">
+    <div class="px-4 pb-6 space-y-4">
+        <!-- Cover Photo -->
+        <div class="relative">
+            <div class="h-36 rounded-2xl bg-gradient-to-br from-marca-400 via-marca-500 to-marca-700 relative overflow-hidden">
+                <div class="absolute inset-0 opacity-20" style="background-image:url('data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'0.15\'%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
+                <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
+            </div>
+            <button onclick="perfil_e_documentos_editarCapa()" class="absolute top-3 right-3 w-8 h-8 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/40 transition-colors active:scale-90" title="Editar foto de capa">
+                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+            </button>
+            <div class="absolute -bottom-10 left-4">
+                <div class="relative">
+                    <div class="w-20 h-20 rounded-full bg-gradient-to-br from-marca-400 to-marca-600 flex items-center justify-center text-white text-2xl font-bold font-display border-4 border-white shadow-lg">MR</div>
+                    <button onclick="perfil_e_documentos_editarAvatar()" class="absolute -bottom-0.5 -right-0.5 w-6 h-6 bg-marca-500 rounded-full flex items-center justify-center border-2 border-white shadow-sm active:scale-90 transition-transform">
+                        <svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nome e status -->
+        <div class="pt-10">
+            <h1 class="text-xl font-bold font-display text-gray-900">Maria Rita da Silva</h1>
+            <div class="flex items-center gap-2 mt-1">
+                <span class="badge bg-emerald-100 text-emerald-700 text-xs font-semibold px-2 py-0.5 rounded-full">Polinscrita Regular</span>
+                <span class="text-sm text-gray-500">ID: POL-2025-0142</span>
+            </div>
+        </div>
+
+        <!-- Perfil completo: barra -->
+        <div class="card p-4">
+            <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-semibold text-gray-700">Perfil completo</span>
+                <span class="text-sm font-bold text-marca-600" id="texto-perfil-completo">75%</span>
+            </div>
+            <div class="w-full h-3 bg-gray-100 rounded-full overflow-hidden">
+                <div id="barra-perfil-completo" class="h-full bg-gradient-to-r from-marca-500 to-marca-400 rounded-full transition-all duration-500" style="width:75%"></div>
+            </div>
+            <p class="text-xs text-gray-500 mt-1.5">Faltam 2 documentos para completar</p>
+        </div>
+
+        <!-- Idioma preferencial -->
+        <div class="card p-4">
+            <div class="flex items-center gap-2 mb-3">
+                <svg class="w-5 h-5 text-marca-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.05 9.15l.57 1.7M19.5 9.5h-15m0 0a2 2 0 01-2-2V5a2 2 0 012-2h15a2 2 0 012 2v2.5a2 2 0 01-2 2m-15 0a2 2 0 00-2 2v2.5a2 2 0 002 2m15 0a2 2 0 012 2v2.5a2 2 0 01-2 2M5 15.5v-2.5a2 2 0 012-2"/></svg>
+                <span class="text-sm font-semibold text-gray-700">Idioma preferencial</span>
+            </div>
+            <div class="grid grid-cols-3 gap-2" id="selector-idioma">
+                <button onclick="perfil_e_documentos_selecionarIdioma('pt')" data-idioma="pt" class="idioma-btn flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 border-marca-500 bg-marca-50 transition-all active:scale-95">
+                    <span class="text-2xl">🇧🇷</span>
+                    <span class="text-xs font-semibold text-marca-700">Português</span>
+                </button>
+                <button onclick="perfil_e_documentos_selecionarIdioma('en')" data-idioma="en" class="idioma-btn flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 border-gray-200 bg-white transition-all active:scale-95 hover:border-gray-300">
+                    <span class="text-2xl">🇺🇸</span>
+                    <span class="text-xs font-semibold text-gray-500">English</span>
+                </button>
+                <button onclick="perfil_e_documentos_selecionarIdioma('es')" data-idioma="es" class="idioma-btn flex flex-col items-center gap-1.5 p-3 rounded-xl border-2 border-gray-200 bg-white transition-all active:scale-95 hover:border-gray-300">
+                    <span class="text-2xl">🇪🇸</span>
+                    <span class="text-xs font-semibold text-gray-500">Español</span>
+                </button>
+            </div>
+            <div id="idioma-preview" class="mt-3 p-3 bg-gray-50 rounded-lg text-xs text-gray-600 italic">
+                "Olá! Bem-vinda à plataforma do Empreendimento Cultural Científico Tecnológico."
+            </div>
+        </div>
+
+        <!-- SEÇÃO: Meus Dados -->
+        <div class="card overflow-hidden">
+            <div class="p-4 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-marca-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                    <h3 class="font-semibold text-gray-800 text-sm">Meus Dados</h3>
+                </div>
+                <button onclick="perfil_e_documentos_editarSecao('dados')" class="text-xs text-marca-600 font-semibold hover:text-marca-700 transition-colors active:scale-95">
+                    <svg class="w-4 h-4 inline mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                    Editar
+                </button>
+            </div>
+            <div class="px-4 pb-4 space-y-2.5 text-sm" id="secao-dados">
+                <div class="flex justify-between"><span class="text-gray-500">Nome completo</span><span class="font-medium text-gray-800 text-right max-w-[60%]">Maria Rita da Silva</span></div>
+                <div class="flex justify-between"><span class="text-gray-500">CPF</span><span class="font-medium text-gray-800 font-mono text-xs">123.456.789-00</span></div>
+                <div class="flex justify-between"><span class="text-gray-500">E-mail</span><span class="font-medium text-gray-800 text-right max-w-[60%]">maria.silva@email.com</span></div>
+                <div class="flex justify-between"><span class="text-gray-500">Telefone</span><span class="font-medium text-gray-800">(11) 98765-4321</span></div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO: Endereço com mini-mapa -->
+        <div class="card overflow-hidden">
+            <div class="p-4 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-marca-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243A8 8 0 1117.657 16.657z"/><circle cx="12" cy="11" r="1.5" fill="currentColor"/></svg>
+                    <h3 class="font-semibold text-gray-800 text-sm">Endereço</h3>
+                </div>
+                <button onclick="perfil_e_documentos_editarSecao('endereco')" class="text-xs text-marca-600 font-semibold hover:text-marca-700 transition-colors active:scale-95">
+                    <svg class="w-4 h-4 inline mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                    Editar
+                </button>
+            </div>
+            <div class="px-4 pb-3 text-sm space-y-1">
+                <p class="font-medium text-gray-800">Rua das Flores, 234</p>
+                <p class="text-gray-600">Jardim Primavera — São Paulo, SP</p>
+                <p class="text-gray-500 text-xs">CEP: 04567-890</p>
+            </div>
+            <div class="h-32 bg-gradient-to-br from-marca-100 to-marca-200 relative overflow-hidden rounded-b-2xl">
+                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 300 120" preserveAspectRatio="none">
+                    <rect fill="#e8f5e9" width="300" height="120"/>
+                    <rect fill="#c8e6c9" x="10" y="10" width="40" height="30" rx="2" opacity="0.6"/>
+                    <rect fill="#c8e6c9" x="60" y="5" width="50" height="35" rx="2" opacity="0.5"/>
+                    <rect fill="#c8e6c9" x="120" y="15" width="35" height="25" rx="2" opacity="0.4"/>
+                    <rect fill="#c8e6c9" x="170" y="8" width="55" height="40" rx="2" opacity="0.5"/>
+                    <rect fill="#c8e6c9" x="240" y="12" width="45" height="30" rx="2" opacity="0.6"/>
+                    <path d="M0 80 Q75 60 150 75 T300 70" stroke="#81c784" stroke-width="2" fill="none" opacity="0.5"/>
+                    <path d="M0 90 Q75 80 150 85 T300 88" stroke="#66bb6a" stroke-width="1.5" fill="none" opacity="0.3"/>
+                    <circle cx="150" cy="48" r="8" fill="#e53935" opacity="0.9"/>
+                    <circle cx="150" cy="48" r="14" fill="none" stroke="#e53935" stroke-width="2" opacity="0.4"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- SEÇÃO: Meus Pedidos -->
+        <div class="card overflow-hidden">
+            <div class="p-4 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-marca-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/></svg>
+                    <h3 class="font-semibold text-gray-800 text-sm">Meus Pedidos</h3>
+                    <span class="badge bg-marca-100 text-marca-700 text-xs px-1.5 py-0.5 rounded-full">3</span>
+                </div>
+                <button onclick="mostrarTela('meus-pedidos')" class="text-xs text-marca-600 font-semibold hover:text-marca-700 transition-colors active:scale-95">Ver todos →</button>
+            </div>
+            <div class="px-4 pb-4 space-y-2.5" id="lista-pedidos-curta">
+                <div onclick="mostrarTela('detalhes-do-servico')" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors active:scale-[0.98]">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center text-white flex-shrink-0"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 12.558a5 5 0 01.058 1.268M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg></div>
+                    <div class="flex-1 min-w-0"><p class="text-sm font-medium text-gray-800 truncate">Consultoria Tecnológica</p><p class="text-xs text-gray-500">Orçamento #1087</p></div>
+                    <span class="badge bg-amber-100 text-amber-700 text-xs px-2 py-0.5 rounded-full flex-shrink-0">Pendente</span>
+                </div>
+                <div onclick="mostrarTela('detalhes-do-servico')" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors active:scale-[0.98]">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-emerald-400 to-emerald-600 flex items-center justify-center text-white flex-shrink-0"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                    <div class="flex-1 min-w-0"><p class="text-sm font-medium text-gray-800 truncate">Oficina de Robótica</p><p class="text-xs text-gray-500">Orçamento #1085</p></div>
+                    <span class="badge bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded-full flex-shrink-0">Aceito</span>
+                </div>
+                <div onclick="mostrarTela('detalhes-do-servico')" class="flex items-center gap-3 p-3 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors active:scale-[0.98]">
+                    <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center text-white flex-shrink-0"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
+                    <div class="flex-1 min-w-0"><p class="text-sm font-medium text-gray-800 truncate">Curso de Programação</p><p class="text-xs text-gray-500">Orçamento #1080</p></div>
+                    <span class="badge bg-blue-100 text-blue-700 text-xs px-2 py-0.5 rounded-full flex-shrink-0">Em andamento</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO: Meus Favoritos -->
+        <div class="card overflow-hidden">
+            <div class="p-4 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-marca-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    <h3 class="font-semibold text-gray-800 text-sm">Meus Favoritos</h3>
+                    <span class="badge bg-rose-100 text-rose-700 text-xs px-1.5 py-0.5 rounded-full">5</span>
+                </div>
+                <button onclick="mostrarTela('vitrine-do-marketplace')" class="text-xs text-marca-600 font-semibold hover:text-marca-700 transition-colors active:scale-95">Ver todos →</button>
+            </div>
+            <div class="px-4 pb-4 flex gap-2.5 overflow-x-auto pb-2" id="lista-favoritos">
+                <div onclick="mostrarTela('detalhes-do-servico')" class="flex-shrink-0 w-28 p-2.5 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors active:scale-95">
+                    <div class="w-full h-16 rounded-lg bg-gradient-to-br from-orange-300 to-red-400 mb-2 flex items-center justify-center text-white">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243A8 8 0 1117.657 16.657z"/><circle cx="12" cy="11" r="1.5" fill="currentColor"/></svg>
+                    </div>
+                    <p class="text-xs font-medium text-gray-800 truncate">Visita Guiada</p>
+                    <p class="text-xs text-marca-600 font-semibold">R$ 45,00</p>
+                </div>
+                <div onclick="mostrarTela('detalhes-do-servico')" class="flex-shrink-0 w-28 p-2.5 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors active:scale-95">
+                    <div class="w-full h-16 rounded-lg bg-gradient-to-br from-teal-300 to-cyan-500 mb-2 flex items-center justify-center text-white">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+                    </div>
+                    <p class="text-xs font-medium text-gray-800 truncate">Workshop Ciência</p>
+                    <p class="text-xs text-marca-600 font-semibold">R$ 80,00</p>
+                </div>
+                <div onclick="mostrarTela('detalhes-do-servico')" class="flex-shrink-0 w-28 p-2.5 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors active:scale-95">
+                    <div class="w-full h-16 rounded-lg bg-gradient-to-br from-indigo-300 to-purple-500 mb-2 flex items-center justify-center text-white">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"/></svg>
+                    </div>
+                    <p class="text-xs font-medium text-gray-800 truncate">Show Cultural</p>
+                    <p class="text-xs text-marca-600 font-semibold">R$ 35,00</p>
+                </div>
+                <div onclick="mostrarTela('detalhes-do-servico')" class="flex-shrink-0 w-28 p-2.5 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors active:scale-95">
+                    <div class="w-full h-16 rounded-lg bg-gradient-to-br from-pink-300 to-rose-500 mb-2 flex items-center justify-center text-white">
+                        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>
+                    </div>
+                    <p class="text-xs font-medium text-gray-800 truncate">Feira de Ciências</p>
+                    <p class="text-xs text-marca-600 font-semibold">Gratuito</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO: Meus Documentos -->
+        <div class="card overflow-hidden">
+            <div class="p-4 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-marca-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                    <h3 class="font-semibold text-gray-800 text-sm">Meus Documentos</h3>
+                </div>
+                <button onclick="perfil_e_documentos_editarSecao('documentos')" class="text-xs text-marca-600 font-semibold hover:text-marca-700 transition-colors active:scale-95">
+                    <svg class="w-4 h-4 inline mr-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                    Editar
+                </button>
+            </div>
+            <div class="px-4 pb-4 space-y-2.5">
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-emerald-100 flex items-center justify-center"><svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                        <div><p class="text-sm font-medium text-gray-800">RG</p><p class="text-xs text-gray-500">Enviado em 12/01/2025</p></div>
+                    </div>
+                    <span class="badge bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded-full">Aprovado</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-emerald-100 flex items-center justify-center"><svg class="w-5 h-5 text-emerald-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                        <div><p class="text-sm font-medium text-gray-800">CPF</p><p class="text-xs text-gray-500">Enviado em 12/01/2025</p></div>
+                    </div>
+                    <span class="badge bg-emerald-100 text-emerald-700 text-xs px-2 py-0.5 rounded-full">Aprovado</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-amber-100 flex items-center justify-center"><svg class="w-5 h-5 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
+                        <div><p class="text-sm font-medium text-gray-800">Comprovante de Residência</p><p class="text-xs text-gray-500">Enviado em 15/01/2025</p></div>
+                    </div>
+                    <span class="badge bg-amber-100 text-amber-700 text-xs px-2 py-0.5 rounded-full">Em análise</span>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-red-100 flex items-center justify-center"><svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
+                        <div><p class="text-sm font-medium text-gray-800">Foto de Perfil</p><p class="text-xs text-gray-500">Não enviado</p></div>
+                    </div>
+                    <button onclick="perfil_e_documentos_uploadDocumento('foto_perfil')" class="text-xs text-marca-600 font-semibold hover:text-marca-700 active:scale-95 transition-colors">Enviar</button>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-lg bg-red-100 flex items-center justify-center"><svg class="w-5 h-5 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg></div>
+                        <div><p class="text-sm font-medium text-gray-800">Declaração de Vínculo</p><p class="text-xs text-gray-500">Não enviado</p></div>
+                    </div>
+                    <button onclick="perfil_e_documentos_uploadDocumento('declaracao')" class="text-xs text-marca-600 font-semibold hover:text-marca-700 active:scale-95 transition-colors">Enviar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO: Avaliações Recebidas -->
+        <div class="card overflow-hidden">
+            <div class="p-4 flex items-center justify-between">
+                <div class="flex items-center gap-2">
+                    <svg class="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+                    <h3 class="font-semibold text-gray-800 text-sm">Avaliações Recebidas</h3>
+                </div>
+            </div>
+            <div class="px-4 pb-4">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="text-3xl font-bold text-gray-900">4.8</div>
+                    <div class="flex-1">
+                        <div class="flex gap-0.5">★★★★★</div>
+                        <p class="text-xs text-gray-500">12 avaliações</p>
+                    </div>
+                </div>
+                <div class="space-y-2.5" id="lista-avaliacoes">
+                    <div class="p-3 bg-gray-50 rounded-xl">
+                        <div class="flex items-center gap-2 mb-1">
+                            <div class="w-6 h-6 rounded-full bg-marca-200 flex items-center justify-center text-marca-700 text-xs font-bold">JP</div>
+                            <span class="text-sm font-medium text-gray-800">João Paulo</span>
+                            <span class="text-amber-400 text-xs">★★★★★</span>
+                        </div>
+                        <p class="text-xs text-gray-600">"Participação exemplar nos eventos culturais. Muito engajada!"</p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-xl">
+                        <div class="flex items-center gap-2 mb-1">
+                            <div class="w-6 h-6 rounded-full bg-teal-200 flex items-center justify-center text-teal-700 text-xs font-bold">AC</div>
+                            <span class="text-sm font-medium text-gray-800">Ana Costa</span>
+                            <span class="text-amber-400 text-xs">★★★★☆</span>
+                        </div>
+                        <p class="text-xs text-gray-600">"Ótima colaboradora nos projetos de ciência e tecnologia."</p>
+                    </div>
+                    <div class="p-3 bg-gray-50 rounded-xl">
+                        <div class="flex items-center gap-2 mb-1">
+                            <div class="w-6 h-6 rounded-full bg-amber-200 flex items-center justify-center text-amber-700 text-xs font-bold">RF</div>
+                            <span class="text-sm font-medium text-gray-800">Roberto Ferraz</span>
+                            <span class="text-amber-400 text-xs">★★★★★</span>
+                        </div>
+                        <p class="text-xs text-gray-600">"Dedicação impressionante. Recomendo fortemente!"</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEÇÃO: Configurações -->
+        <div class="card overflow-hidden">
+            <div class="p-4 flex items-center gap-2">
+                <svg class="w-5 h-5 text-marca-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                <h3 class="font-semibold text-gray-800 text-sm">Configurações</h3>
+            </div>
+            <div class="px-4 pb-4 space-y-3">
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center gap-2.5">
+                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+                        <span class="text-sm text-gray-700">Notificações Push</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked onchange="perfil_e_documentos_toggle(this, 'push')" class="sr-only peer">
+                        <div class="w-10 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-5 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-marca-500"></div>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center gap-2.5">
+                        <svg class="w-4 h-4 text-green-600" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        <span class="text-sm text-gray-700">WhatsApp</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" checked onchange="perfil_e_documentos_toggle(this, 'whatsapp')" class="sr-only peer">
+                        <div class="w-10 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-5 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-500"></div>
+                    </label>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center gap-2.5">
+                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                        <span class="text-sm text-gray-700">Privacidade do Perfil</span>
+                    </div>
+                    <svg class="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+                </div>
+                <div class="flex items-center justify-between p-3 bg-gray-50 rounded-xl">
+                    <div class="flex items-center gap-2.5">
+                        <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/></svg>
+                        <span class="text-sm text-gray-700">Tema Escuro</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" onchange="perfil_e_documentos_toggle(this, 'tema')" class="sr-only peer">
+                        <div class="w-10 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-5 after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-gray-700"></div>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Botão Logout -->
+        <button onclick="perfil_e_documentos_confirmarLogout()" class="w-full py-3.5 bg-red-50 hover:bg-red-100 text-red-600 font-semibold rounded-2xl transition-colors active:scale-95 flex items-center justify-center gap-2 text-sm">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            Sair da Conta
+        </button>
+
+        <p class="text-center text-xs text-gray-400 pb-2">Versão 1.0.0 · BlueCircuit © 2025</p>
+    </div>
+
+    <!-- Modal de confirmação de logout -->
+    <div id="modal-logout" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+        <div class="bg-white rounded-2xl p-6 max-w-sm w-full shadow-2xl transform transition-all" id="modal-logout-content">
+            <div class="text-center">
+                <div class="w-14 h-14 mx-auto mb-3 bg-red-100 rounded-full flex items-center justify-center">
+                    <svg class="w-7 h-7 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                </div>
+                <h3 class="text-lg font-bold font-display text-gray-900 mb-1">Sair da conta?</h3>
+                <p class="text-sm text-gray-500 mb-5">Você precisará fazer login novamente para acessar a plataforma.</p>
+                <div class="flex gap-3">
+                    <button onclick="perfil_e_documentos_fecharModalLogout()" class="flex-1 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-colors active:scale-95 text-sm">Cancelar</button>
+                    <button onclick="perfil_e_documentos_executarLogout()" class="flex-1 py-2.5 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-xl transition-colors active:scale-95 text-sm">Sair</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function(){
+        function getIcons(){return{
+            user:'<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>',
+            map:'<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243A8 8 0 1117.657 16.657z"/><circle cx="12" cy="11" r="1.5" fill="currentColor"/></svg>',
+            clipboard:'<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>',
+            heart:'<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/></svg>',
+            file:'<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>',
+            star:'<svg class="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>',
+            settings:'<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>',
+            logout:'<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>'
+        };}
+
+        window.perfil_e_documentos_editarAvatar = function(){
+            toast('Abrindo seletor de imagem...', 'info');
+            setTimeout(function(){ toast('Avatar atualizado com sucesso!', 'ok'); }, 800);
+        };
+
+        window.perfil_e_documentos_editarCapa = function(){
+            toast('Abrindo seletor de imagem de capa...', 'info');
+            setTimeout(function(){ toast('Foto de capa atualizada!', 'ok'); }, 800);
+        };
+
+        window.perfil_e_documentos_selecionarIdioma = function(codigo){
+            var previews = {
+                pt: '"Olá! Bem-vinda à plataforma do Empreendimento Cultural Científico Tecnológico."',
+                en: '"Hello! Welcome to the Scientific Cultural Technological Enterprise platform."',
+                es: '"¡Hola! Bienvenida a la plataforma del Emprendimiento Cultural Científico Tecnológico."'
+            };
+            var nomes = {pt:'Português', en:'English', es:'Español'};
+            document.querySelectorAll('#selector-idioma .idioma-btn').forEach(function(btn){
+                var id = btn.getAttribute('data-idioma');
+                if(id === codigo){
+                    btn.classList.remove('border-gray-200','bg-white');
+                    btn.classList.add('border-marca-500','bg-marca-50');
+                    btn.querySelector('span:last-child').classList.remove('text-gray-500');
+                    btn.querySelector('span:last-child').classList.add('text-marca-700');
+                } else {
+                    btn.classList.remove('border-marca-500','bg-marca-50');
+                    btn.classList.add('border-gray-200','bg-white');
+                    btn.querySelector('span:last-child').classList.remove('text-marca-700');
+                    btn.querySelector('span:last-child').classList.add('text-gray-500');
+                }
+            });
+            document.getElementById('idioma-preview').textContent = previews[codigo];
+            toast('Idioma alterado para ' + nomes[codigo], 'ok');
+        };
+
+        window.perfil_e_documentos_editarSecao = function(secao){
+            if(secao === 'dados') toast('Abrindo editor de dados pessoais...', 'info');
+            else if(secao === 'endereco') toast('Abrindo editor de endereço...', 'info');
+            else if(secao === 'documentos') toast('Abrindo gerenciador de documentos...', 'info');
+        };
+
+        window.perfil_e_documentos_uploadDocumento = function(tipo){
+            var nomes = {foto_perfil:'Foto de Perfil', declaracao:'Declaração de Vínculo'};
+            toast('Selecionando ' + nomes[tipo] + '...', 'info');
+            setTimeout(function(){
+                toast(nomes[tipo] + ' enviado com sucesso! Aguardando aprovação.', 'ok');
+                perfil_e_documentos_atualizarBarra();
+            }, 1200);
+        };
+
+        window.perfil_e_documentos_toggle = function(el, tipo){
+            var estado = el.checked ? 'ativado' : 'desativado';
+            var nomes = {push:'Notificações Push', whatsapp:'Notificações WhatsApp', tema:'Tema Escuro'};
+            toast(nomes[tipo] + ' ' + estado + '.', 'ok');
+        };
+
+        window.perfil_e_documentos_confirmarLogout = function(){
+            document.getElementById('modal-logout').classList.remove('hidden');
+            document.getElementById('modal-logout').classList.add('flex');
+        };
+
+        window.perfil_e_documentos_fecharModalLogout = function(){
+            document.getElementById('modal-logout').classList.add('hidden');
+            document.getElementById('modal-logout').classList.remove('flex');
+        };
+
+        window.perfil_e_documentos_executarLogout = function(){
+            perfil_e_documentos_fecharModalLogout();
+            toast('Você saiu da conta.', 'info');
+        };
+
+        function perfil_e_documentos_atualizarBarra(){
+            var barra = document.getElementById('barra-perfil-completo');
+            var texto = document.getElementById('texto-perfil-completo');
+            var atual = parseInt(barra.style.width);
+            var novo = Math.min(atual + 12, 100);
+            barra.style.width = novo + '%';
+            texto.textContent = novo + '%';
+            if(novo >= 100) toast('Perfil 100% completo! 🎉', 'ok');
+        }
+    })();
+    </script>
+</section>
+
     <!-- TELAS -->
         </div>
 
